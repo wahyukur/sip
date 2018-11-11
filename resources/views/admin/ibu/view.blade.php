@@ -21,24 +21,24 @@
 
 @include('notification')
 
-<a href="{{ route('ibu.create') }}" class="btn btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a>
-
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Data Ibu</h3>
+                <h3 class="box-title" style="margin-right: 40px"><a href="{{ route('ibu.create') }}" class="btn btn-sm btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a> | Data Ibu</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nama Ibu</th>
-                            <th>Nama Suami</th>
-                            <th>Alamat</th>
-                            <th>Aksi</th>
+                            <th style="width: 5%;text-align: center;">#</th>
+                            <th style="width: 15%;text-align: center;">Nama Ibu</th>
+                            <th style="width: 15%;text-align: center;">Nama Suami</th>
+                            <th style="width: 20%;text-align: center;">Alamat</th>
+                            <th style="width: 20%;text-align: center;">No. BPJS</th>
+                            <th style="width: 12%;text-align: center;">Status Gakin</th>
+                            <th style="width: 13%;text-align: center;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,13 +48,26 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $datas->nama_ibu }}</td>
                             <td>{{ $datas->nama_suami }}</td>
-                            <td>{{ $datas->alamat }}</td>
+                            <td>{{ $datas->alamat }} Rt {{ $datas->rt }}/Rw {{ $datas->rw }}</td>
                             <td>
+                                @if ($datas->No_BPJS == null)
+                                    <p style="text-align: center; color: #9ca4af;">Tidak Ada</p>
+                                @else
+                                    {{ $datas->No_BPJS }}
+                                @endif
+                            </td>
+                            <td style="text-align: center;">{{ $datas->gakin }}</td>
+                            <td style="text-align: center;">
                                 <form action="{{ route('ibu.destroy', $datas->id_ibu) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <a href="{{ route('ibu.edit', $datas->id_ibu) }}" class=" btn btn-sm btn-primary">Edit</a>
-                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
+                                    <div class="btn-group">
+                                        <a href="{{ route('ibu.edit', $datas->id_ibu) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+
+                                        <a href="{{ route('ibu.show', $datas->id_ibu) }}" class=" btn btn-sm btn-success" data-toggle="tooltip" title="Detail"><span class="glyphicon glyphicon-info-sign"></span></a>
+
+                                        <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </div>
                                 </form>
                             </td>
                         </tr>
@@ -62,11 +75,13 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>#</th>
-                            <th>Nama Ibu</th>
-                            <th>Nama Suami</th>
-                            <th>Tgl Lahir</th>
-                            <th>Aksi</th>
+                            <th style="width: 5%;text-align: center;">#</th>
+                            <th style="width: 15%;text-align: center;">Nama Ibu</th>
+                            <th style="width: 15%;text-align: center;">Nama Suami</th>
+                            <th style="width: 20%;text-align: center;">Alamat</th>
+                            <th style="width: 20%;text-align: center;">No. BPJS</th>
+                            <th style="width: 12%;text-align: center;">Status Gakin</th>
+                            <th style="width: 13%;text-align: center;">Aksi</th>
                         </tr>
                     </tfoot>
                 </table>

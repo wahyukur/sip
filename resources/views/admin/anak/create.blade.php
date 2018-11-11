@@ -81,7 +81,7 @@
 									<div class="input-group" style="padding-right: 6px;">
 										<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
 										<input type="text" class="form-control" placeholder="Berat Badan" name="bb_lahir" required>
-										<span class="input-group-addon">gr</span>
+										<span class="input-group-addon">Kg</span>
 									</div>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-long-arrow-up"></i></span>
@@ -97,10 +97,10 @@
 								<div class="input-group col-md-8">
 									<div class="form-check-inline">
 										<label class="form-check-label" style="padding: 6px 10px 0px 0px;">
-											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Laki-Laki"> Laki-Laki
+											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Laki-Laki" required> Laki-Laki
 										</label>
 										<label class="form-check-label">
-											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Perempuan"> Perempuan
+											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Perempuan" required> Perempuan
 										</label>
 									</div>
 								</div>
@@ -138,7 +138,18 @@
 								<div class="input-group col-md-8">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-										<input type="text" class="form-control" placeholder="Anak Ke-" name="dokter" required>
+										<input type="text" class="form-control" placeholder="Nama Dokter/Bidan" name="dokter" required>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<label class="col-md-4 control-label" for="nik">NIK</label>
+								<div class="input-group col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+										<input type="number" class="form-control" placeholder="NIK" name="NIK_anak">
 									</div>
 								</div>
 							</div>

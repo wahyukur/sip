@@ -7,12 +7,22 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/') }}"><b>Admin</b>LTE</a>
+        <a href="{{ route('login') }}">
+            <div class="media">
+                <div class="media-left">
+                    <img src="{!! asset('dist/img/logo.png') !!}" class="media-object" style="width:75px">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Sistem Informasi</h4>
+                    <p>Posyandu Mandiri</p>
+                </div>
+            </div>
+        </a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Masuk</p>
-        <form action="{{ route('login') }}" aria-label="{{ __('Login') }}" method="post">
+        <p class="login-box-msg" style="font-size: 30px">Masuk</p>
+        <form action="{{ route('postlogin') }}" aria-label="{{ __('Login') }}" method="post">
             @csrf
             <div class="form-group has-feedback">
                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
@@ -35,13 +45,7 @@
                 @endif
             </div>
             <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                        </label>
-                    </div>
-                </div>
+                <div class="col-xs-8"></div>
                 <!-- /.col -->
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
@@ -51,7 +55,7 @@
         </form>
         <div class="social-auth-links">
             <p style="text-align: center;">- OR -</p>
-            <a href="">Lupa Password ?</a><br>
+            <a href="#">Lupa Password ?</a><br>
         </div>
         <!-- /.social-auth-links -->
     </div>

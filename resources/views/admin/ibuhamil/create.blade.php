@@ -124,7 +124,7 @@
 								<div class="input-group col-md-8">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-thermometer-empty"></i></span>
-										<input type="text" class="form-control" placeholder="Penyakit Penyerta" name="penyakit_penyerta" required>
+										<input type="text" class="form-control" placeholder="Penyakit Penyerta" name="penyakit_penyerta">
 									</div>
 								</div>
 							</div>

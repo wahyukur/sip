@@ -8,7 +8,7 @@
 @section('breadcrumb')
 <h1>
     Data Pengguna Aplikasi
-    <small>kelola data kader</small>
+    <small>kelola data pengguna</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -21,13 +21,11 @@
 
 @include('notification')
 
-<a href="{{ route('pengguna.create') }}" class="btn btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a>
-
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Data Pengguna Aplikasi</h3>
+                <h3 class="box-title" style="margin-right: 40px"><a href="{{ route('pengguna.create') }}" class="btn btn-sm btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a> | Data Pengguna Aplikasi</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -49,18 +47,22 @@
                             <td>{{ $datas->name }}</td>
                             <td>{{ $datas->email }}</td>
                             <td>
-                                @if ($datas->level == 1)
-                                    {{ 'Admin' }}
-                                @else
-                                    {{ 'User' }}
-                                @endif
+                                <span class="label label-success">
+                                    @if ($datas->level == 1)
+                                        {{ 'Admin' }}
+                                    @else
+                                        {{ 'User' }}
+                                    @endif
+                                </span>
                             </td>
                             <td>
                                 <form action="{{ route('pengguna.destroy', $datas->id) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <a href="{{ route('pengguna.edit', $datas->id) }}" class=" btn btn-sm btn-primary">Edit</a>
-                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
+                                    <div class="btn-group">
+                                        <a href="{{ route('pengguna.edit', $datas->id) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </div>
                                 </form>
                             </td>
                         </tr>

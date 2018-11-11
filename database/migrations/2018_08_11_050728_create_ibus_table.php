@@ -24,11 +24,12 @@ class CreateIbusTable extends Migration
             $table->integer('rw');
             $table->string('kelurahan');
             $table->string('kecamatan');
+            $table->string('No_tlp');
             $table->string('agama');
-            $table->integer('NIK');
-            $table->integer('No_KK');
-            $table->integer('No_BPJS');
-            $table->integer('No_tlp');
+            $table->string('NIK');
+            $table->string('No_KK');
+            $table->string('No_BPJS');
+            $table->string('gakin');
             $table->timestamps();
         });
     }

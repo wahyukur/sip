@@ -8,7 +8,7 @@
 @section('breadcrumb')
 <h1>
     Data Pengguna Aplikasi
-    <small>kelola data kader</small>
+    <small>kelola data pengguna</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -64,21 +64,13 @@
 				                                    {{ 'User' }}
 				                                @endif
 											</option>
-											<option value="">-- Level --</option>
-											<option value="1">Admin</option>
-											<option value="0">User</option>
+											<option disabled="disabled">-- Level --</option>
+											@if ($datas->level == 1)
+												<option value="0">User</option>
+											@else
+												<option value="1">Admin</option>
+											@endif
 										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="row">
-								<label class="col-md-4 control-label" for="notelp">Password</label>
-								<div class="input-group col-md-8">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
-										<input type="number" class="form-control" placeholder="Password" name="password" value="{{ $datas->password }}" required>
 									</div>
 								</div>
 							</div>

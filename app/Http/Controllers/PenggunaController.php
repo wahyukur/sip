@@ -44,14 +44,13 @@ class PenggunaController extends Controller
     public function update(Request $request, $id)
     {
         // menerima data request
-        $data = Ibu::where('id_ibu', $id)->first();
-        $data->nama_ibu     = $request->get('nama_ibu');
-        $data->nama_suami   = $request->get('nama_suami');
-        $data->tempat_lahir = $request->get('tempat_lahir');
-        $data->tgl_lahir    = $request->get('tgl_lahir');
+        $data = User::where('id', $id)->first();
+        $data->name     = $request->get('name');
+        $data->email   = $request->get('email');
+        $data->level = $request->get('level');
         $data->save();
 
-        return redirect()->route('ibu.index')->with('success', 'Data Berhasil Diupdate');
+        return redirect()->route('pengguna.index')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -62,8 +61,14 @@ class PenggunaController extends Controller
      */
     public function destroy($id)
     {
-        $data = Ibu::where('id_ibu', $id)->first();
+        $data = User::where('id', $id)->first();
         $data->delete();
-        return redirect()->route('ibu.index')->with('success', 'Data Berhasil Dihapus');
+        return redirect()->route('pengguna.index')->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function profile($id)
+    {
+        $data = User::where('id', $id)->first();
+        return view('admin.user.detail', compact('data'));
     }
 }

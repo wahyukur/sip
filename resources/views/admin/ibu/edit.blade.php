@@ -158,6 +158,27 @@
 						</div>
 						<div class="form-group">
 							<div class="row">
+								<label class="col-md-4 control-label" for="nama_anak">Status Gakin</label>
+								<div class="input-group col-md-8">
+									<div class="form-check-inline">
+										<label class="form-check-label" style="padding: 6px 10px 0px 0px;">
+											<input type="radio" name="gakin" class="form-check-input minimal" value="Non Gakin" checked="
+											@if ($datas->gakin == 'Non Gakin')
+												checked;
+											@endif"> Non Gakin
+										</label>
+										<label class="form-check-label">
+											<input type="radio" name="gakin" class="form-check-input minimal" value="Gakin" checked="
+											@if ($datas->gakin == 'Gakin')
+												checked;
+											@endif"> Gakin
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
 								<label class="col-md-4 control-label" for="name"></label>
 								<div class="input-group col-md-8">
 									<button type="submit" class="btn btn-primary" style="margin-right: 6px;">Update</button>

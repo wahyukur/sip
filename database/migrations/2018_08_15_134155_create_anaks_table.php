@@ -26,6 +26,7 @@ class CreateAnaksTable extends Migration
             $table->string('jenis_persalinan');
             $table->string('tempat_persalinan');
             $table->string('dokter');
+            $table->string('NIK_anak')->nullable();
             $table->timestamps();
             $table->foreign('id_ibu')->references('id_ibu')->on('ibus');
         });

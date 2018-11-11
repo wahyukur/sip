@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\IbuHamil;
+use Illuminate\Support\Facades\DB;
 
 class IbuHamilController extends Controller
 {
@@ -18,8 +19,16 @@ class IbuHamilController extends Controller
      */
     public function index()
     {
-        $data = IbuHamil::all();
-        return view('admin.ibuhamil.view', compact('data'));
+        $data = DB::table('ibu_hamils')
+                ->where('status', null)
+                ->get();
+        $data2 = DB::table('ibu_hamils')
+                ->where('status', 'Meninggal')
+                ->get();
+        $data3 = DB::table('ibu_hamils')
+                ->where('status', 'Melahirkan')
+                ->get();
+        return view('admin.ibuhamil.view', compact('data', 'data2', 'data3'));
     }
 
     /**
@@ -67,7 +76,14 @@ class IbuHamilController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = IbuHamil::where('id_bumil', $id)->get();
+        $data2 = DB::table('ibu_hamils')
+                ->where('status', 'Meninggal')
+                ->get();
+        $data3 = DB::table('ibu_hamils')
+                ->where('status', 'Melahirkan')
+                ->get();
+        return view('admin.ibuhamil.detail', compact('data', 'data2', 'data3'));
     }
 
     /**
@@ -124,5 +140,46 @@ class IbuHamilController extends Controller
     	$data = IbuHamil::where('id_bumil', $id)->first();
         $data->delete();
         return redirect()->route('ibuhamil.index')->with(['success' => 'Data Berhasil Di Hapus']);
+    }
+
+    public function meninggal(Request $request)
+    {
+        $id                     = $request->get('idbumil');
+        $data                   = IbuHamil::where('id_bumil', $id)->first();
+        $status                 = "Meninggal";
+        $data->status           = $status;
+        $data->umur_meninggal   = $request->get('umur_meninggal');
+        $data->tempat_meninggal = $request->get('tempat_meninggal');
+        $data->save();
+
+        if ($data->save() == true) {
+            return redirect()->route('ibuhamil.index')->with(['success' => 'Data Berhasil Di Update']);
+        } else {
+            return redirect()->route('ibuhamil.index')->with(['error' => 'Data Gagal Di Update']);
+        }
+    }
+
+    public function melahirkan(Request $request)
+    {
+        $id                      = $request->get('idbumil');
+        $data                    = IbuHamil::where('id_bumil', $id)->first();
+        $status                  = "Melahirkan";
+        $data->status            = $status;
+        $data->umur_melahirkan   = $request->get('umur_meninggal');
+        $data->tgl_melahirkan    = $request->get('tgl_melahirkan');
+        $data->bb_anak           = $request->get('bb_anak');
+        $data->tb_anak           = $request->get('tb_anak');
+        $data->anak_ke           = $request->get('anak_ke');
+        $data->jenis_persalinan  = $request->get('jenis_persalinan');
+        $data->tempat_persalinan = $request->get('tempat_persalinan');
+        $data->dokter            = $request->get('dokter');
+        $data->nama_anak         = $request->get('nama_anak');
+        $data->save();
+
+        if ($data->save() == true) {
+            return redirect()->route('ibuhamil.index')->with(['success' => 'Data Berhasil Di Update']);
+        } else {
+            return redirect()->route('ibuhamil.index')->with(['error' => 'Data Gagal Di Update']);
+        }
     }
 }

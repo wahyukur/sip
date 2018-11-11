@@ -62,4 +62,10 @@ class DashboardController extends Controller
             return view('user.dashboard');
         }
     }
+
+    public function getLogout()
+    {
+        Auth::logout();
+        return redirect()->back();
+    }
 }

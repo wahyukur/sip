@@ -86,9 +86,6 @@
                 {!! $calendar->calendar() !!}
             </div>
             <!-- /.box-body -->
-            <div class="box-footer text-black">
-                Calendar Footer
-            </div>
         </div>
         <!-- /.box -->
     </section>

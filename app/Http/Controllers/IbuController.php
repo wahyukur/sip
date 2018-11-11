@@ -56,6 +56,7 @@ class IbuController extends Controller
         $data->NIK          = $request->get('NIK');
         $data->No_KK        = $request->get('No_KK');
         $data->No_BPJS      = $request->get('No_BPJS');
+        $data->gakin        = $request->get('gakin');
         $data->save();
 
         return redirect()->route('ibu.index')->with(['success' => 'Data Berhasil Di Tambah']);
@@ -69,7 +70,8 @@ class IbuController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Ibu::where('id_ibu', $id)->get();
+        return view('admin.ibu.detail', compact('data'));
     }
 
     /**
@@ -109,6 +111,7 @@ class IbuController extends Controller
         $data->NIK          = $request->get('NIK');
         $data->No_KK        = $request->get('No_KK');
         $data->No_BPJS      = $request->get('No_BPJS');
+        $data->gakin        = $request->get('gakin');
         $data->save();
 
         return redirect()->route('ibu.index')->with(['success' => 'Data Berhasil Di Update']);

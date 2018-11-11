@@ -100,16 +100,10 @@
 								<div class="input-group col-md-8">
 									<div class="form-check-inline">
 										<label class="form-check-label" style="padding: 6px 10px 0px 0px;">
-											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Laki-Laki" checked="
-											@if ($datas->jenis_kelamin == 'Laki-Laki')
-												checked;
-											@endif"> Laki-Laki
+											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Laki-Laki" <?php echo ($datas->jenis_kelamin == 'Laki-Laki')?'checked':'' ?> required> Laki-Laki
 										</label>
 										<label class="form-check-label">
-											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Perempuan" checked="
-											@if ($datas->jenis_kelamin == 'Perempuan')
-												checked;
-											@endif"> Perempuan
+											<input type="radio" name="jenis_kelamin" class="form-check-input minimal" value="Perempuan" <?php echo ($datas->jenis_kelamin == 'Perempuan')?'checked':'' ?> required> Perempuan
 										</label>
 									</div>
 								</div>
@@ -148,6 +142,17 @@
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-user-md"></i></span>
 										<input type="text" class="form-control" placeholder="Anak Ke-" name="dokter" value="{{ $datas->dokter }}" required>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<label class="col-md-4 control-label" for="nik">NIK</label>
+								<div class="input-group col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+										<input type="number" class="form-control" placeholder="NIK" name="NIK_anak" value="{{ $datas->NIK_anak }}">
 									</div>
 								</div>
 							</div>

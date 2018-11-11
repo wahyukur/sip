@@ -14,7 +14,10 @@ class CreateJenisImunisasisTable extends Migration
     public function up()
     {
         Schema::create('jenis_imunisasis', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_j_imun');
+            $table->string('nama_imun');
+            $table->integer('umur');
+            $table->integer('batas_umur')->nullable();
             $table->timestamps();
         });
     }

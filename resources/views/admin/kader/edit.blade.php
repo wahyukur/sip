@@ -55,7 +55,7 @@
 								<label class="col-md-4 control-label" for="nama_anak">Jabatan</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+										<span class="input-group-addon"><i class="fa fa-user"></i></span>
 										<select class="form-control" name="jabatan" style="width: 100%;">
 											<option selected="selected" value="{{ $datas->jabatan }}">{{ $datas->jabatan }}</option>
 											<option value="">-- Jabatan --</option>

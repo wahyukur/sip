@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\JenisImunisasi;
 
 class JenisImunisasiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,8 @@ class JenisImunisasiController extends Controller
      */
     public function index()
     {
-        //
+        $data = JenisImunisasi::all();
+        return view('admin.jenisimunisasi.view', compact('data'));
     }
 
     /**
@@ -23,7 +29,7 @@ class JenisImunisasiController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.jenisimunisasi.create');
     }
 
     /**
@@ -34,7 +40,12 @@ class JenisImunisasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data             = new JenisImunisasi;
+        $data->nama_imun  = $request->get('nama_imun');
+        $data->umur       = $request->get('umur');
+        $data->save();
+
+        return redirect()->route('jenisimunisasi.index')->with(['success' => 'Data Berhasil Di Tambah']);
     }
 
     /**
@@ -56,7 +67,8 @@ class JenisImunisasiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = JenisImunisasi::where('id_j_imun', $id)->get();
+        return view('admin.jenisimunisasi.edit', compact('data'));
     }
 
     /**
@@ -68,7 +80,12 @@ class JenisImunisasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = JenisImunisasi::where('id_j_imun', $id)->first();
+        $data->nama_imun  = $request->get('nama_imun');
+        $data->umur       = $request->get('umur');
+        $data->save();
+
+        return redirect()->route('jenisimunisasi.index')->with(['success' => 'Data Berhasil Di Update']);
     }
 
     /**
@@ -79,6 +96,8 @@ class JenisImunisasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = JenisImunisasi::where('id_j_imun', $id)->first();
+        $data->delete();
+        return redirect()->route('jenisimunisasi.index')->with(['success' => 'Data Berhasil Di Hapus']);
     }
 }

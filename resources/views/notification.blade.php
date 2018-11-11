@@ -26,6 +26,27 @@
         {{ $message }}
     </div>
 @endif
+@if ($message = Session::get('success&vitA'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
+        <p>Data Berhasil Di Tambah</p>
+        {{ $message }}
+    </div>
+@endif
+@if(Session::get('info_imun'))
+    <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-info"></i> Info!</h4>
+        <p>Jadwal Tepat Imunisasi Lengkap : </p>
+        <ul>
+            @foreach(Session::get('info_imun') as $key)
+                <li>{{ $key }}</li>
+            @endforeach
+        </ul>
+        <a href="{{ route('imunisasi.create') }}">Imunisasi >></a>
+    </div>
+@endif
 @if ($errors->any())
     <div class="alert alert-info alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

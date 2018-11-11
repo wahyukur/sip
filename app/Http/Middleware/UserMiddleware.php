@@ -19,7 +19,7 @@ class UserMiddleware
         $user = Auth::user();
 
         if($user->level != 0){
-            return redirect()->route('user.admin');
+            return redirect(url('/'));
         }
 
         return $next($request);

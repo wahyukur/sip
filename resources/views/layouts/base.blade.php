@@ -36,7 +36,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="{{ url('/') }}" class="logo">
+            <a href="{{ route('admin') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>SIP</b>M</span>
                 <!-- logo for regular state and mobile devices -->
@@ -62,7 +62,7 @@
                                     <img src="{!! asset('dist/img/avatar2.png') !!}" class="img-circle" alt="User Image">
                                     <p>
                                         {{ Auth::user()->name }}
-                                        <small>Member since Nov. 2012</small>
+                                        <!-- <small>Member since Nov. 2012</small> -->
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -71,10 +71,7 @@
                                         <a href="#" class="btn btn-default btn-flat"><span><i class="fa fa-user"></i></span> Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span><i class="fa fa-power-off"></i></span> Sign out</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
+                                        <a href="{{ route('logout') }}" class="btn btn-default btn-flat"><span><i class="fa fa-power-off"></i></span> Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -99,83 +96,123 @@
                     </div>
                 </div>
 
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">MAIN NAVIGATION</li>
-                    <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-database"></i> <span>Data Master</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ url('/ibu') }}"><i class="fa fa-circle-o"></i> Data Ibu</a></li>
-                            <li><a href="{{ url('/anak') }}"><i class="fa fa-circle-o"></i> Data Anak</a></li>
-                            <li><a href="{{ url('#') }}"><i class="fa fa-circle-o"></i> Jenis Imunisasi</a></li>
-                            <li><a href="{{ url('/ibuhamil') }}"><i class="fa fa-circle-o"></i> Data Ibu Hamil</a></li>
-                            <li><a href="{{ url('/kader') }}"><i class="fa fa-circle-o"></i> Data Kader</a></li>
-                            <li><a href="{{ url('/pengguna') }}"><i class="fa fa-circle-o"></i> Data User</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-grav"></i> <span>Timbang Anak</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-balance-scale"></i> <span>Hasil Timbang</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-eyedropper"></i> <span>Imunisasi</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-medkit"></i> <span>Vitamin A</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/agenda') }}">
-                            <i class="fa fa-calendar"></i> <span>Agenda</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-desktop"></i> <span>Kegiatan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/bukutamu') }}">
-                            <i class="fa fa-address-book"></i> <span>Buku Tamu</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-bed"></i> <span>Kematian</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ url('/ibu') }}"><i class="fa fa-circle-o"></i> Kematian Ibu Hamil</a></li>
-                            <li><a href="{{ url('/ibu') }}"><i class="fa fa-circle-o"></i> Kematian Anak</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-file-text"></i> <span>Laporan</span>
-                        </a>
-                    </li>
-                </ul>
+                @if (Auth::user()->level == 1)
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header">MAIN NAVIGATION</li>
+                        <li>
+                            <a href="{{ route('admin') }}">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-database"></i> <span>Data Master</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('ibu.index') }}"><i class="fa fa-circle-o"></i> Data Ibu</a></li>
+                                <li><a href="{{ route('anak.index') }}"><i class="fa fa-circle-o"></i> Data Anak</a></li>
+                                <li><a href="{{ route('jenisimunisasi.index') }}"><i class="fa fa-circle-o"></i> Jenis Imunisasi</a></li>
+                                <!-- <li><a href="{{ route('ibuhamil.index') }}"><i class="fa fa-circle-o"></i> Data Ibu Hamil</a></li> -->
+                                <li><a href="{{ route('kader.index') }}"><i class="fa fa-circle-o"></i> Data Kader</a></li>
+                                <li><a href="{{ route('pengguna.index') }}"><i class="fa fa-circle-o"></i> Data User</a></li>
+                                <li><a href="{{ route('viewPKK') }}"><i class="fa fa-circle-o"></i> PKK</a></li>
+                                <li><a href="{{ route('viewUKM') }}"><i class="fa fa-circle-o"></i> UKM</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('timbang.create') }}">
+                                <i class="fa fa-grav"></i> <span>Timbang Anak</span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="{{ route('timbang.index') }}">
+                                <i class="fa fa-balance-scale"></i> <span>Hasil Timbang</span>
+                            </a>
+                        </li> -->
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-balance-scale"></i> <span>Hasil Timbang</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('timbang.index') }}"><i class="fa fa-circle-o"></i> Data Timbang</a></li>
+                                <li><a href="{{ route('statusgizi.index') }}"><i class="fa fa-circle-o"></i> Data Status Gizi Anak</a></li>
+                                <li><a href="{{ route('viewBGM') }}"><i class="fa fa-circle-o"></i> Data BGM dan 2T</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('imunisasi.index') }}">
+                                <i class="fa fa-eyedropper"></i> <span>Imunisasi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('vitA.index') }}">
+                                <i class="fa fa-medkit"></i> <span>Vitamin A</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('agenda.index') }}">
+                                <i class="fa fa-calendar"></i> <span>Agenda</span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="{{ route('albumList') }}">
+                                <i class="fa fa-picture-o"></i> <span>Galeri</span>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="{{ url('/kegiatan') }}">
+                                <i class="fa fa-desktop"></i> <span>Kegiatan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('bukutamu.index') }}">
+                                <i class="fa fa-address-book"></i> <span>Buku Tamu</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('laporan.index') }}">
+                                <i class="fa fa-file-text"></i> <span>Laporan</span>
+                            </a>
+                        </li>
+                    </ul>
+                @else
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header">MAIN NAVIGATION</li>
+                        <li>
+                            <a href="{{ url('/') }}">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('timbang.create') }}">
+                                <i class="fa fa-grav"></i> <span>Timbang Anak</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/timbang') }}">
+                                <i class="fa fa-balance-scale"></i> <span>Hasil Timbang</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/') }}">
+                                <i class="fa fa-eyedropper"></i> <span>Imunisasi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/vitA') }}">
+                                <i class="fa fa-medkit"></i> <span>Vitamin A</span>
+                            </a>
+                        </li>
+                    </ul>
+                @endif
             </section>
             <!-- /.sidebar -->
         </aside>
@@ -199,11 +236,8 @@
         </div>
 
         <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Sistem Informasi Posyandu Mandiri </strong>Kelurahan Sumberrejo.
-  </footer>
+            <strong>Sistem Informasi Posyandu Mandiri </strong>Kelurahan Sumberrejo.
+        </footer>
     </div>
     
     <!-- jQuery 3 -->
