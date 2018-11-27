@@ -9,6 +9,10 @@ use App\Timbang;
 
 class StatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     public function index()
     {
         date_default_timezone_set('Asia/Jakarta');

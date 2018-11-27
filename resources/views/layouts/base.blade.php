@@ -166,10 +166,22 @@
                                 <i class="fa fa-picture-o"></i> <span>Galeri</span>
                             </a>
                         </li> -->
-                        <li>
-                            <a href="{{ url('/kegiatan') }}">
+                        <!-- <li>
+                            <a href="{{ route('kegiatan.index') }}">
                                 <i class="fa fa-desktop"></i> <span>Kegiatan</span>
                             </a>
+                        </li> -->
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-balance-scale"></i> <span>Kegiatan</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{ route('kegiatan.index') }}"><i class="fa fa-circle-o"></i> Kegiatan</a></li>
+                                <li><a href="{{ route('kehadiran.index') }}"><i class="fa fa-circle-o"></i> Kehadiran</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="{{ route('bukutamu.index') }}">

@@ -92,13 +92,12 @@
 								<div class="input-group col-md-8">
 									<button type="submit" class="btn btn-primary" style="margin-right: 6px;">Submit</button>
 									<a href="{{ route('form1') }}" target="_blank" class="btn btn-danger">Form 1</a>
-									<a href="{{ route('form2') }}" class="btn btn-danger">Form 2</a>
-									<a href="{{ route('form3') }}" class="btn btn-danger">Form 3</a>
-									<a href="{{ route('form4') }}" class="btn btn-danger">Form 4</a>
-									<a href="{{ route('form5') }}" class="btn btn-danger">Form 5</a>
-									<a href="{{ route('form6') }}" class="btn btn-danger">Form 6</a>
-									<a href="{{ route('form7') }}" class="btn btn-danger">Form 7</a>
-									<a href="{{ route('form1') }}" class="btn btn-danger">Form 1</a>
+									<a href="{{ route('form2') }}" target="_blank" class="btn btn-danger">Form 2</a>
+									<a href="{{ route('form3') }}" target="_blank" class="btn btn-danger">Form 3</a>
+									<a href="{{ route('form4') }}" target="_blank" class="btn btn-danger">Form 4</a>
+									<a href="{{ route('form5') }}" target="_blank" class="btn btn-danger">Form 5</a>
+									<a href="{{ route('form6') }}" target="_blank" class="btn btn-danger">Form 6</a>
+									<a href="{{ route('form7') }}" target="_blank" class="btn btn-danger">Form 7</a>
 								</div>
 							</div>
 						</div>

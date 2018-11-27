@@ -7,12 +7,12 @@
 
 @section('breadcrumb')
 <h1>
-    Kegiatan Posyandu
-    <small>kelola data kegiatan posyandu</small>
+    Absensi Kehadiran
+    <small>ketidakhadiran bayi/balita dalam kegiatan</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Kegiatan</li>
+    <li class="active">Kehadiran</li>
 </ol>
 @endsection
 
@@ -24,7 +24,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title" style="margin-right: 40px"><a href="{{ route('kegiatan.create') }}" class="btn btn-sm btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a> | Kegiatan Posyandu</h3>
+                <h3 class="box-title" style="margin-right: 40px"><a href="{{ route('kehadiran.create') }}" class="btn btn-sm btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a> | Kegiatan Posyandu</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -32,10 +32,12 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Tanggal</th>
-                            <th style="text-align: center;">Waktu</th>
-                            <th style="text-align: center;">Nama Kegiatan</th>
-                            <th style="text-align: center;">Nama Tamu</th>
+                            <th style="text-align: center;">Nama Balita</th>
+                            <th style="text-align: center;">Jenis Kelamin</th>
+                            <th style="text-align: center;">Umur</th>
+                            <th style="text-align: center;">Alasan</th>
+                            <th style="text-align: center;">Tgl Kunjungan</th>
+                            <th style="text-align: center;">Keterangan</th>
                             <th style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
@@ -44,26 +46,18 @@
                         @foreach($data as $datas)
                         <tr>
                             <td>{{ $no++ }}</td>
+                            <td>{{ $datas->nama_anak }}</td>
+                            <td>{{ $datas->jenis_kelamin }}</td>
+                            <td>{{ $datas->tgl_lhr }}</td>
+                            <td>{{ $datas->alasan }}</td>
+                            <td>{{ $datas->tgl_kunjungan }}</td>
+                            <td>ket</td>
                             <td>
-                                @php
-                                    $date = date("d-m-Y", strtotime($datas->start))
-                                @endphp
-                                {{ $date }}
-                            </td>
-                            <td>
-                                @php
-                                    $date = date("H:i", strtotime($datas->start))
-                                @endphp
-                                {{ $date }} WIB
-                            </td>
-                            <td>{{ $datas->kegiatan }}</td>
-                            <td>{{ $datas->nama_tamu }}</td>
-                            <td>
-                                <form action="{{ route('kegiatan.destroy', $datas->id_kegiatan) }}" method="post">
+                                <form action="{{ route('kehadiran.destroy', $datas->id_kehadiran) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <div class="btn-group">
-                                        <a href="{{ route('kegiatan.edit', $datas->id_kegiatan) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a href="{{ route('kehadiran.edit', $datas->id_kehadiran) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                                         <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
                                     </div>
 
@@ -75,11 +69,14 @@
                     <tfoot>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Tanggal</th>
-                            <th style="text-align: center;">Waktu</th>
-                            <th style="text-align: center;">Nama Kegiatan</th>
-                            <th style="text-align: center;">Nama Tamu</th>
+                            <th style="text-align: center;">Nama Balita</th>
+                            <th style="text-align: center;">Jenis Kelamin</th>
+                            <th style="text-align: center;">Umur</th>
+                            <th style="text-align: center;">Alasan</th>
+                            <th style="text-align: center;">Tgl Kunjungan</th>
+                            <th style="text-align: center;">Keterangan</th>
                             <th style="text-align: center;">Aksi</th>
+
                         </tr>
                     </tfoot>
                 </table>

@@ -38,6 +38,7 @@ Route::middleware(['web', 'auth'])->group(function(){
 		Route::resource('vitA', 'VitAController');
 		Route::resource('kegiatan', 'KegiatanController');
 		Route::resource('jenisimunisasi', 'JenisImunisasiController');
+		Route::resource('kehadiran', 'KehadiranController');
 		Route::resource('laporan', 'LaporanController');
 
 		Route::get('printAnak', 'AnakController@printAnak')->name('printAnak');

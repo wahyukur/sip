@@ -11,6 +11,10 @@ use PDF;
 
 class LaporanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -119,42 +123,68 @@ class LaporanController extends Controller
     }
 
     public function form1(){
-        // Fetch all customers from database
-        // $data = Customer::get();
-        // Send data to the view using loadView function of PDF facade
-        // $pdf = PDF::loadView('laporan.form1');
-        // // If you want to store the generated pdf to the server then you can use the store function
-        // $pdf->save(storage_path().'_filename.pdf');
-        // // Finally, you can download the file using download function
-        // return $pdf->download('customers.pdf');
-
-        // $pdf = PDF::loadView('admin.laporan.form1');
-        // return $pdf->stream();
-
         $data = DB::table('ibus as I')
                 ->leftjoin('anaks as A', 'I.id_ibu', '=', 'A.id_ibu')
                 ->get();
         $pdf = PDF::loadView('admin.laporan.form1', $data);
         $pdf->setPaper('A4', 'portrait');
-        $pdf->save(storage_path().'_filename.pdf');
-        return $pdf->stream('Form 1 - Laporan Bulanan Pelayanan Gizi.pdf', array("Attachment" => false));
+        // $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->stream('Form 1-Laporan Bulanan Pelayanan Gizi.pdf', array("Attachment" => false));
     }
     public function form2(){
-        //
+        $data = DB::table('ibus as I')
+                ->leftjoin('anaks as A', 'I.id_ibu', '=', 'A.id_ibu')
+                ->get();
+        $pdf = PDF::loadView('admin.laporan.form2', $data);
+        $pdf->setPaper('A4', 'portrait');
+        // $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->stream('Form 2-Data Balita Tidak Hadir.pdf', array("Attachment" => false));
     }
     public function form3(){
-        //
+        $data = DB::table('ibus as I')
+                ->leftjoin('anaks as A', 'I.id_ibu', '=', 'A.id_ibu')
+                ->get();
+        $pdf = PDF::loadView('admin.laporan.form3', $data);
+        $pdf->setPaper('A4', 'landscape');
+        // $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->stream('Form 3-Balita Gizi Buruk.pdf', array("Attachment" => false));
     }
     public function form4(){
-        //
+        $data = DB::table('ibus as I')
+                ->leftjoin('anaks as A', 'I.id_ibu', '=', 'A.id_ibu')
+                ->get();
+        $pdf = PDF::loadView('admin.laporan.form4', $data);
+        $pdf->setPaper('A4', 'landscape');
+        // $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->stream('Form 4-Balita 2T dan BGM.pdf', array("Attachment" => false));
     }
     public function form5(){
-        //
+        $data = DB::table('ibus as I')
+                ->leftjoin('anaks as A', 'I.id_ibu', '=', 'A.id_ibu')
+                ->get();
+        $pdf = PDF::loadView('admin.laporan.form5', $data);
+        $pdf->setPaper('A4', 'landscape');
+        // $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->stream('Form 5-Balita Gizi Lebih.pdf', array("Attachment" => false));
     }
     public function form6(){
-        //
+        $data = DB::table('vit_as as V')
+                ->leftjoin('anaks as A', 'V.id_anak', '=', 'A.id_anak')
+                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->select('I.No_KK', 'A.NIK_anak', 'A.nama_anak', 'A.jenis_kelamin', 'A.tgl_lhr', 'I.alamat', 'I.rt', 'I.rw', 'V.tgl_vitA', 'V.keterangan')
+                ->get();
+        $pdf = PDF::loadView('admin.laporan.form6', $data);
+        $pdf->setPaper('A4', 'landscape');
+        // $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->stream('Form 6-Pemberian Vitamin A.pdf', array("Attachment" => false));
     }
     public function form7(){
-        //
+        $data = DB::table('ibus as I')
+                ->leftjoin('anaks as A', 'I.id_ibu', '=', 'A.id_ibu')
+                ->get();
+        $pdf = PDF::loadView('admin.laporan.form7', $data);
+        $pdf->setPaper('A4', 'portrait');
+        // $pdf->save(storage_path().'_filename.pdf');
+        return $pdf->stream('Form 7-Dokumentasi Kegiatan.pdf', array("Attachment" => false));
     }
 }
