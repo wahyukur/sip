@@ -18,8 +18,15 @@ use Illuminate\Http\Request;
 // });
 
 Route::post('login', 'ReactController@login');
+Route::get('getID/{id}', 'ReactController@getID');
 Route::get('getBio/{id}', 'ReactController@getBio');
+Route::get('getTimbang/{id}', 'ReactController@getTimbang');
+Route::get('getDetailTimbang/{id}', 'ReactController@getDetailTimbang');
+Route::get('getImunisasi/{id}', 'ReactController@getImunisasi');
+Route::get('getVitA/{id}', 'ReactController@getVitA');
+Route::get('getAgenda', 'ReactController@getAgenda');
+Route::post('postProfile/{id}', 'ReactController@postProfile');
 
 
-Route::post('register', 'AuthController@register');
-Route::post('login', 'AuthController@login');
+// Route::post('register', 'AuthController@register');
+// Route::post('login', 'AuthController@login');

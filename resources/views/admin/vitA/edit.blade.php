@@ -68,9 +68,9 @@
 								<div class="input-group col-md-8">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-child"></i></span>
-										<select class="form-control select2" name="keterangan" style="width: 100%;" required>
+										<select class="form-control" name="keterangan" style="width: 100%;" required>
 											<option selected="selected" value="{{ $data->keterangan }}">{{ $data->keterangan }}</option>
-											<option value="">-- Nama Anak --</option>
+											<option value="">-- Pilih --</option>
 											<option value="Vitamin A Biru">Vitamin A Biru</option>
 											<option value="Vitamin A Merah">Vitamin A Merah</option>
 										</select>

@@ -20,7 +20,7 @@ class KehadiranController extends Controller
         $data = DB::table('kehadirans as P')
                 ->leftjoin('kegiatans as K', 'K.id_kegiatan', '=', 'P.id_kegiatan')
                 ->leftjoin('anaks as A', 'A.id_anak', '=', 'P.id_anak')
-                ->select('P.id_kehadiran' ,'A.nama_anak', 'A.jenis_kelamin', 'A.tgl_lhr', 'P.alasan', 'P.tgl_kunjungan')
+                ->select('P.id_kehadiran' ,'A.nama_anak', 'A.jenis_kelamin', 'A.tgl_lhr', 'P.alasan', 'P.tgl_kunjungan', 'P.ket_hadir')
                 ->get();
         return view('admin.kehadiran.view', compact('data'));
     }
@@ -33,10 +33,11 @@ class KehadiranController extends Controller
     public function create()
     {
         $data  = DB::table('anaks as A')
-                ->leftjoin('ibus as I', 'I.id_ibu', '=', 'A.id_ibu')
+                ->leftjoin('users as I', 'I.id', '=', 'A.id_ibu')
                 ->get();
         $data2 = DB::table('kegiatans as K')
                 ->leftjoin('agendas as A', 'A.id_agenda', '=', 'K.id_agenda')
+                ->where('A.j_kegiatan', '=', 0)
                 ->get();
         return view('admin.kehadiran.create', compact('data', 'data2'));
     }
@@ -55,6 +56,7 @@ class KehadiranController extends Controller
         $data->id_anak       = $request->get('id_anak');
         $data->alasan        = $request->get('alasan');
         $data->tgl_kunjungan = $request->get('tgl_kunjungan');
+        $data->ket_hadir     = $request->get('ket_hadir');
         $data->save();
 
         return redirect()->route('kehadiran.index')->with(['success' => 'Data Berhasil Di Tambah']);
@@ -83,11 +85,11 @@ class KehadiranController extends Controller
                 ->leftjoin('kegiatans as K', 'K.id_kegiatan', '=', 'P.id_kegiatan')
                 ->leftjoin('agendas as G', 'G.id_agenda', '=', 'K.id_agenda')
                 ->leftjoin('anaks as A', 'A.id_anak', '=', 'P.id_anak')
-                ->leftjoin('ibus as I', 'I.id_ibu', '=', 'A.id_ibu')
+                ->leftjoin('users as I', 'I.id', '=', 'A.id_ibu')
                 ->where('id_kehadiran', $id)
                 ->get();
         $data2  = DB::table('anaks as A')
-                ->leftjoin('ibus as I', 'I.id_ibu', '=', 'A.id_ibu')
+                ->leftjoin('users as I', 'I.id', '=', 'A.id_ibu')
                 ->get();
         $data3 = DB::table('kegiatans as K')
                 ->leftjoin('agendas as A', 'A.id_agenda', '=', 'K.id_agenda')
@@ -110,6 +112,7 @@ class KehadiranController extends Controller
         $data->id_anak       = $request->get('id_anak');
         $data->alasan        = $request->get('alasan');
         $data->tgl_kunjungan = $request->get('tgl_kunjungan');
+        $data->ket_hadir     = $request->get('ket_hadir');
         $data->save();
 
         return redirect()->route('kehadiran.index')->with(['success' => 'Data Berhasil Di Update']);
@@ -123,6 +126,8 @@ class KehadiranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Kehadiran::where('id_kehadiran', $id)->first();
+        $data->delete();
+        return redirect()->route('kehadiran.index')->with(['success' => 'Data Berhasil Di Hapus']);
     }
 }

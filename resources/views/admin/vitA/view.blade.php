@@ -47,20 +47,26 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $datas->nama_anak }}</td>
-                            <td>{{ $datas->jenis_kelamin }}</td>
+                            <td>
+                                @if ($datas->jenis_kelamin == 0)
+                                    Laki - Laki
+                                @else
+                                    Perempuan
+                                @endif
+                            </td>
                             <td>{{ $datas->tgl_lhr }}</td>
                             <td>{{ $datas->alamat }} Rt {{ $datas->rt }}/Rw {{ $datas->rw }}</td>
                             <td>{{ $datas->tgl_vitA }}</td>
                             <td>{{ $datas->keterangan }}</td>
                             <td>
-                                <form action="{{ route('vitA.destroy', $datas->id_vitA) }}" method="post">
+                                <!-- <form action="{{ route('vitA.destroy', $datas->id_vitA) }}" method="post">
                                     {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+                                    {{ method_field('DELETE') }} -->
                                     <div class="btn-group">
                                         <a href="{{ route('vitA.edit', $datas->id_vitA) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                        <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                                        <!-- <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button> -->
                                     </div>
-                                </form>
+                                <!-- </form> -->
                             </td>
                         </tr>
                         @endforeach

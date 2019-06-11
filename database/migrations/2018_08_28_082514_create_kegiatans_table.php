@@ -19,11 +19,10 @@ class CreateKegiatansTable extends Migration
             $table->unsignedInteger('id_tamu');
             $table->unsignedInteger('id_ukm');
             $table->unsignedInteger('id_pkk');
-            $table->string('gambar_kegiatan1');
-            $table->string('gambar_kegiatan2');
-            $table->string('pmt1');
-            $table->string('pmt2');
-            $table->string('tidak_hadir');
+            $table->string('gambar_kegiatan1')->nullable();
+            $table->string('gambar_kegiatan2')->nullable();
+            $table->string('pmt1')->nullable();
+            $table->string('pmt2')->nullable();
             $table->timestamps();
             $table->foreign('id_agenda')->references('id_agenda')->on('agendas');
             $table->foreign('id_tamu')->references('id_tamu')->on('buku_tamus');

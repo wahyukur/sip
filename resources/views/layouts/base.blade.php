@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="shortcut icon" href="{!! asset('dist/img/nobg-fix.png') !!}" />
 
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{!! asset('bower_components/bootstrap/dist/css/bootstrap.min.css') !!}">
@@ -36,39 +37,37 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="{{ route('admin') }}" class="logo">
+            <a href="{{ route('admin') }}" class="logo" style="background-color: #2c3e50">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>SIP</b>M</span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>SIPosyandu</b> Mandiri</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
+            <nav class="navbar navbar-static-top" style="background-color: #34495e">
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{!! asset('dist/img/avatar2.png') !!}" class="user-image" alt="User Image">
-                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                                <!-- <img src="{!! asset('dist/img/avatar2.png') !!}" class="user-image" alt="User Image">
+                                <span class="hidden-xs">Administrator</span> -->
+                                <i class="fa fa-gears"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="{!! asset('dist/img/avatar2.png') !!}" class="img-circle" alt="User Image">
                                     <p>
-                                        {{ Auth::user()->name }}
+                                        {{Auth::user()->nama_ibu}}
+                                        <small>Administrator</small>
                                         <!-- <small>Member since Nov. 2012</small> -->
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat"><span><i class="fa fa-user"></i></span> Profile</a>
+                                        <a href="{{ route('getProfile') }}" class="btn btn-default btn-flat"><span><i class="fa fa-user"></i></span> Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ route('logout') }}" class="btn btn-default btn-flat"><span><i class="fa fa-power-off"></i></span> Sign out</a>
@@ -91,8 +90,23 @@
                         <img src="{!! asset('dist/img/avatar2.png') !!}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>{{ Auth::user()->name }}</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        <p>{{Auth::user()->nama_ibu}}</p>
+                        <a href="#">
+                            <i class="fa fa-circle text-success"></i> 
+                            @if (Auth::user()->level == 1)
+                                @if (Auth::user()->jabatan == 1)
+                                    Ketua
+                                @elseif (Auth::user()->jabatan == 2)
+                                    Sekretaris
+                                @elseif (Auth::user()->jabatan == 3)
+                                    Bendahara
+                                @else
+                                    Anggota
+                                @endif
+                            @else
+                                Online
+                            @endif
+                        </a>
                     </div>
                 </div>
 
@@ -118,7 +132,6 @@
                                 <li><a href="{{ route('jenisimunisasi.index') }}"><i class="fa fa-circle-o"></i> Jenis Imunisasi</a></li>
                                 <!-- <li><a href="{{ route('ibuhamil.index') }}"><i class="fa fa-circle-o"></i> Data Ibu Hamil</a></li> -->
                                 <li><a href="{{ route('kader.index') }}"><i class="fa fa-circle-o"></i> Data Kader</a></li>
-                                <li><a href="{{ route('pengguna.index') }}"><i class="fa fa-circle-o"></i> Data User</a></li>
                                 <li><a href="{{ route('viewPKK') }}"><i class="fa fa-circle-o"></i> PKK</a></li>
                                 <li><a href="{{ route('viewUKM') }}"><i class="fa fa-circle-o"></i> UKM</a></li>
                             </ul>
@@ -143,7 +156,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="{{ route('timbang.index') }}"><i class="fa fa-circle-o"></i> Data Timbang</a></li>
                                 <li><a href="{{ route('statusgizi.index') }}"><i class="fa fa-circle-o"></i> Data Status Gizi Anak</a></li>
-                                <li><a href="{{ route('viewBGM') }}"><i class="fa fa-circle-o"></i> Data BGM dan 2T</a></li>
+                                <!-- <li><a href="{{ route('viewBGM') }}"><i class="fa fa-circle-o"></i> Data BGM dan 2T</a></li> -->
                             </ul>
                         </li>
                         <li>
@@ -171,6 +184,11 @@
                                 <i class="fa fa-desktop"></i> <span>Kegiatan</span>
                             </a>
                         </li> -->
+                        <li>
+                            <a href="{{ route('bukutamu.index') }}">
+                                <i class="fa fa-address-book"></i> <span>Buku Tamu</span>
+                            </a>
+                        </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-balance-scale"></i> <span>Kegiatan</span>
@@ -179,18 +197,18 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{ route('kegiatan.index') }}"><i class="fa fa-circle-o"></i> Kegiatan</a></li>
-                                <li><a href="{{ route('kehadiran.index') }}"><i class="fa fa-circle-o"></i> Kehadiran</a></li>
+                                <li><a href="{{ route('kegiatan.index') }}"><i class="fa fa-circle-o"></i> Data Kegiatan</a></li>
+                                <li><a href="{{ route('kehadiran.index') }}"><i class="fa fa-circle-o"></i> Data Kehadiran</a></li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="{{ route('bukutamu.index') }}">
-                                <i class="fa fa-address-book"></i> <span>Buku Tamu</span>
-                            </a>
                         </li>
                         <li>
                             <a href="{{ route('laporan.index') }}">
                                 <i class="fa fa-file-text"></i> <span>Laporan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('pengguna.index') }}">
+                                <i class="fa fa-user"></i> <span>Data User</span>
                             </a>
                         </li>
                     </ul>
@@ -283,9 +301,22 @@
     <!-- AdminLTE App -->
     <script src="{!! asset('dist/js/adminlte.min.js') !!}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{!! asset('dist/js/pages/dashboard.js') !!}"></script>
+    <!-- <script src="{!! asset('dist/js/pages/dashboard.js') !!}"></script> -->
     <!-- AdminLTE for demo purposes -->
-    <script src="{!! asset('dist/js/demo.js') !!}"></script>
+    <!-- <script src="{!! asset('dist/js/demo.js') !!}"></script> -->
+
+    <script>
+        /** tambah class active jika di klik */
+        var url = window.location;
+        // ini untuk menambahkan class active pada menu yg tidak memiliki anak atau single link
+        $('ul.sidebar-menu a').filter(function() {
+            return this.href == url;
+        }).parent().addClass('active');
+        // ini untuk menu beranak, jadi otomatis akan terbuka sesuai dengan link tujuan
+        $('ul.treeview-menu a').filter(function() {
+            return this.href == url;
+        }).parentsUntil(".sidebar-menu > .treeview-menu").addClass('active');
+    </script>
 
     @yield('java')
 </body>

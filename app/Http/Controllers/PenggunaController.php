@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\User;
 
 class PenggunaController extends Controller
@@ -18,8 +19,42 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = DB::table('users')
+                ->where('user', '=', 1)
+                ->orderBy('level', 'desc')
+                ->get();
         return view('admin.user.view', compact('data'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        // $data = User::select('id', 'nama_ibu', 'nama_suami')->get();
+        $data = DB::table('users')
+                ->where('user', '=', 0)
+                ->get();
+        return view('admin.user.create', compact('data'));
+    }
+
+    public function store(Request $request)
+    {
+        // menerima data request
+        $pswd = rand(100000,999999);
+        $id = $request->get('id');
+        $data = User::where('id', $id)->first();
+        $data->email    = $request->get('email');
+        $data->password = bcrypt($pswd);
+        $data->level    = $request->get('level');
+        $data->user     = 1;
+        $data->save();
+
+        return redirect()->route('pengguna.index')->with([
+            'pswd' => $pswd
+        ]);
     }
 
     /**
@@ -31,7 +66,8 @@ class PenggunaController extends Controller
     public function edit($id)
     {
         $data = User::where('id', $id)->get();
-        return view('admin.user.edit', compact('data'));
+        $data2 = User::select('id', 'nama_ibu', 'nama_suami')->get();
+        return view('admin.user.edit', compact('data', 'data2'));
     }
 
     /**
@@ -70,5 +106,17 @@ class PenggunaController extends Controller
     {
         $data = User::where('id', $id)->first();
         return view('admin.user.detail', compact('data'));
+    }
+
+    public function generatePwd($id)
+    {
+        $pswd = rand(1000,9999);
+        $data = User::where('id', $id)->first();
+        $data->password = bcrypt($pswd);
+        $data->save();
+
+        return redirect()->route('pengguna.index')->with([
+            'pswd' => $pswd
+        ]);
     }
 }

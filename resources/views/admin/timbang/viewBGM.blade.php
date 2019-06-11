@@ -22,8 +22,8 @@
 
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right">
-        <li><a href="#tab_2-2" data-toggle="tab">Data Timbang</a></li>
-        <li class="active"><a href="#tab_1-1" data-toggle="tab">Data Timbang Bulan Ini</a></li>
+        <li><a href="#tab_2-2" data-toggle="tab">Data BGM/2T</a></li>
+        <li class="active"><a href="#tab_1-1" data-toggle="tab">BGM/2T Bulan Ini</a></li>
         <li class="pull-left header"><h4>Hasil Timbang Anak</h4></li>
     </ul>
     <!-- Bulan INI -->
@@ -43,7 +43,6 @@
                                         <th>Tanggal Timbang</th>
                                         <th>Status Gizi</th>
                                         <th>Keterangan</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,16 +58,6 @@
                                         <td>{{ $datas->tgl_timbang }}</td>
                                         <td>{{ $datas->status_gizi }}</td>
                                         <td>{{ $datas->ket_timbang }}</td>
-                                        <td>
-                                            <form action="{{ route('timbang.destroy', $datas->id_timbang) }}" method="post">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <div class="btn-group">
-                                                    <a href="{{ route('timbang.edit', $datas->id_timbang) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </div>
-                                            </form>
-                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -81,7 +70,6 @@
                                         <th>Tanggal Timbang</th>
                                         <th>Status Gizi</th>
                                         <th>Keterangan</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -108,7 +96,6 @@
                                         <th>Tanggal Timbang</th>
                                         <th>Status Gizi</th>
                                         <th>Keterangan</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,17 +111,6 @@
                                         <td>{{ $datas2->tgl_timbang }}</td>
                                         <td>{{ $datas2->status_gizi }}</td>
                                         <td>{{ $datas2->ket_timbang }}</td>
-                                        <td>
-                                            <form action="{{ route('timbang.destroy', $datas2->id_timbang) }}" method="post">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <div class="btn-group">
-                                                    <a href="{{ route('timbang.edit', $datas2->id_timbang) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </div>
-
-                                            </form>
-                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -147,7 +123,6 @@
                                         <th>Tanggal Timbang</th>
                                         <th>Status Gizi</th>
                                         <th>Keterangan</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>

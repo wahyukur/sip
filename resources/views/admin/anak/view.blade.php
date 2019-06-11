@@ -26,10 +26,7 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title" style="margin-right: 40px"><a href="{{ route('anak.create') }}" class="btn btn-sm btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a> | Data Anak</h3>
-                <div class="btn-group pull-right">
-                    <a href="{{ route('printAnak') }}" class=" btn btn-sm bg-maroon" target="_blank"><span class="glyphicon glyphicon-print"></span> PDF</a>
-                    <a href="#" class=" btn btn-sm btn-success"><span><i class="fa fa-file-excel-o" aria-hidden="true"></i></span> Excel</a>
-                </div>
+                <a href="{{ route('exportAnak') }}" class=" btn btn-sm btn-success pull-right" target="_blank"><span><i class="fa fa-file-excel-o" aria-hidden="true"></i></span> Export Excel</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -39,8 +36,9 @@
                             <th style="width: 5%; text-align: center;">#</th>
                             <th style="width: 20%; text-align: center;">Nama Anak</th>
                             <th style="width: 35%; text-align: center;">Orang Tua</th>
-                            <th style="width: 15%; text-align: center;">Jenis Kelamin</th>
+                            <th style="width: 12%; text-align: center;">Jenis Kelamin</th>
                             <th style="width: 10%; text-align: center;">Tgl Lahir</th>
+                            <th style="width: 3%; text-align: center;">KMS</th>
                             <th style="width: 15%; text-align: center;">Aksi</th>
                         </tr>
                     </thead>
@@ -51,8 +49,21 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $datas->nama_anak }}</td>
                             <td>{{ $datas->nama_ibu }} & {{ $datas->nama_suami }}</td>
-                            <td>{{ $datas->jenis_kelamin }}</td>
+                            <td>
+                                @if ($datas->jenis_kelamin == 0)
+                                    Laki-Laki
+                                @else
+                                    Perempuan
+                                @endif
+                            </td>
                             <td>{{ $datas->tgl_lhr }}</td>
+                            <td>
+                                @if ($datas->KMS == 0)
+                                    <i class="fa fa-check-circle-o fa-lg" aria-hidden="true" style="color: green"></i>
+                                @else
+                                    <i class="fa fa-times-circle-o fa-lg" aria-hidden="true" style="color: red"></i>
+                                @endif
+                            </td>
                             <td style="text-align: center;">
                                 <form action="{{ route('anak.destroy', $datas->id_anak) }}" method="post">
                                     {{ csrf_field() }}
@@ -71,12 +82,13 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th style="width: 5%; text-align: center;">#</th>
-                            <th style="width: 20%; text-align: center;">Nama Anak</th>
-                            <th style="width: 35%; text-align: center;">Orang Tua</th>
-                            <th style="width: 15%; text-align: center;">Jenis Kelamin</th>
-                            <th style="width: 10%; text-align: center;">Tgl Lahir</th>
-                            <th style="width: 15%; text-align: center;">Aksi</th>
+                            <th>#</th>
+                            <th>Nama Anak</th>
+                            <th>Orang Tua</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Tgl Lahir</th>
+                            <th>KMS</th>
+                            <th>Aksi</th>
                         </tr>
                     </tfoot>
                 </table>

@@ -62,7 +62,7 @@
 								<label class="col-md-4 control-label" for="keperluan">Keperluan</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+										<span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
 										<input type="text" class="form-control" placeholder="keperluan" name="keperluan" required>
 									</div>
 								</div>

@@ -60,14 +60,14 @@
                                         <td>{{ $datas->status_gizi }}</td>
                                         <td>{{ $datas->ket_timbang }}</td>
                                         <td>
-                                            <form action="{{ route('timbang.destroy', $datas->id_timbang) }}" method="post">
+                                            <!-- <form action="{{ route('timbang.destroy', $datas->id_timbang) }}" method="post">
                                                 {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
+                                                {{ method_field('DELETE') }} -->
                                                 <div class="btn-group">
                                                     <a href="{{ route('timbang.edit', $datas->id_timbang) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                                                    <!-- <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button> -->
                                                 </div>
-                                            </form>
+                                            <!-- </form> -->
                                         </td>
                                     </tr>
                                     @endforeach
@@ -125,15 +125,14 @@
                                         <td>{{ $datas2->status_gizi }}</td>
                                         <td>{{ $datas2->ket_timbang }}</td>
                                         <td>
-                                            <form action="{{ route('timbang.destroy', $datas2->id_timbang) }}" method="post">
+                                            <!-- <form action="{{ route('timbang.destroy', $datas2->id_timbang) }}" method="post">
                                                 {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
+                                                {{ method_field('DELETE') }} -->
                                                 <div class="btn-group">
                                                     <a href="{{ route('timbang.edit', $datas2->id_timbang) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                                                    <!-- <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button> -->
                                                 </div>
-
-                                            </form>
+                                            <!-- </form> -->
                                         </td>
                                     </tr>
                                     @endforeach

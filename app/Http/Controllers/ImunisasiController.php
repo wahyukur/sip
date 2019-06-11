@@ -25,7 +25,7 @@ class ImunisasiController extends Controller
         // $data = Imunisasi::all();
         $data = DB::table('imunisasis as M')
                 ->leftjoin('anaks as A', 'M.id_anak', '=', 'A.id_anak')
-                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
                 ->leftjoin('jenis_imunisasis as J', 'M.id_j_imun', '=', 'J.id_j_imun')
                 ->select('M.id_imun', 'A.nama_anak', 'J.nama_imun', 'M.tgl_imun', 'M.booster', 'M.ket_imun')
                 ->orderBy('id_imun', 'asc')
@@ -41,7 +41,7 @@ class ImunisasiController extends Controller
     public function create()
     {
         $data = DB::table('anaks as A')
-                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
                 ->orderBy('nama_anak', 'asc')
                 ->get();
         $data2 = JenisImunisasi::all();
@@ -92,12 +92,12 @@ class ImunisasiController extends Controller
     {
         $data = DB::table('imunisasis as M')
                 ->leftjoin('anaks as A', 'M.id_anak', '=', 'A.id_anak')
-                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
                 ->leftjoin('jenis_imunisasis as J', 'M.id_j_imun', '=', 'J.id_j_imun')
                 ->where('M.id_imun', $id)
                 ->get();
         $data1 = DB::table('anaks as A')
-                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
                 ->orderBy('nama_anak', 'asc')
                 ->get();
         $data2 = JenisImunisasi::all();

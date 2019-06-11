@@ -78,6 +78,7 @@
 											@endforeach
 						                </select>
 									</div>
+									<p style="color: grey">Note : Dapat isi lebih dari satu</p>
 								</div>
 							</div>
 						</div>

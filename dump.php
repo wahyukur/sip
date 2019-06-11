@@ -614,3 +614,68 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    // GRAFIK MALE
+    $(function() {
+        var data_viewer = <?php echo $grafik; ?>;
+
+        Highcharts.chart('salesChart', {
+            colors: ['#7cb5ec', '#f7a35c', '#90ee7e', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+            chart: {
+                backgroundColor: null,
+            },
+            title: {
+                text: 'KMS Laki-Laki',
+                style: {
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    textTransform: 'uppercase'
+                },
+            },
+            subtitle: {
+                text: 'Kartu Menuju Sehat'
+            },
+            xAxis: {
+                title: {
+                    text: 'Umur',
+                    style: {
+                        textTransform: 'uppercase'
+                    },
+                },
+                gridLineWidth: 1,
+                labels: {
+                    style: {
+                        fontSize: '12px'
+                    }
+                },
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            series: [{
+                type: 'scatter',
+                marker: {
+                    enabled: true,
+                    symbol: 'cross',
+                    fillColor: '#000',
+                    lineColor: '#FFF'
+                },
+                name: 'BB',
+                data: data_viewer
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+        });
+    })
+</script>

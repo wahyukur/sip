@@ -36,13 +36,13 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Nama Anak</th>
-                                        <th>Umur</th>
-                                        <th>BB/TB</th>
-                                        <th>Tanggal Timbang</th>
-                                        <th>Status Gizi</th>
-                                        <th>Aksi</th>
+                                        <th style="text-align: center;">#</th>
+                                        <th style="text-align: center;">Nama Anak</th>
+                                        <th style="text-align: center;">Umur</th>
+                                        <th style="text-align: center;">BB/TB</th>
+                                        <th style="text-align: center;">Tanggal Timbang</th>
+                                        <th style="text-align: center;">Status Gizi</th>
+                                        <th style="text-align: center;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,35 +57,30 @@
                                         </td>
                                         <td>{{ $datas->tgl_timbang }}</td>
                                         <td>{{ $datas->status_gizi }}</td>
-                                        <td>
-                                            <form action="{{ route('statusgizi.destroy', $datas->id_timbang) }}" method="post">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <div class="btn-group">
-                                                    @if($datas->status_gizi == 'BB Sangat Kurang')
-                                                        @if($datas->gibur_klinis == null or $datas->st_gizi_bbtb == null or $datas->penanganan == null or $datas->penyebab_utama == null or $datas->alasan_gibur == null or $datas->tindakan == null)
-                                                            <a href="{{ route('statusgizi.edit', $datas->id_timbang) }}" class=" btn btn-sm btn-success">Lengkapi Data</a>
-                                                        @else
-                                                            <a href="{{ route('statusgizi.edit', $datas->id_timbang) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                                        @endif
+                                        <td style="text-align: center;">
+                                            <div class="btn-group">
+                                                @if($datas->status_gizi == 'BB Sangat Kurang')
+                                                    @if($datas->gibur_klinis == null or $datas->st_gizi_bbtb == null or $datas->penanganan == null or $datas->penyebab_utama == null or $datas->alasan_gibur == null or $datas->tindakan == null)
+                                                        <a href="{{ route('statusgizi.edit', $datas->id_timbang) }}" class=" btn btn-sm btn-success" data-toggle="tooltip" title="Lengkapi data"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                    @else
+                                                        <a href="{{ route('statusgizi.edit', $datas->id_timbang) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                                                     @endif
                                                     <a href="{{ route('statusgizi.show', $datas->id_timbang) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Detail"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </div>
-                                            </form>
+                                                @endif
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Nama Anak</th>
-                                        <th>Umur</th>
-                                        <th>BB/TB</th>
-                                        <th>Tanggal Timbang</th>
-                                        <th>Status Gizi</th>
-                                        <th>Aksi</th>
+                                        <th style="text-align: center;">#</th>
+                                        <th style="text-align: center;">Nama Anak</th>
+                                        <th style="text-align: center;">Umur</th>
+                                        <th style="text-align: center;">BB/TB</th>
+                                        <th style="text-align: center;">Tanggal Timbang</th>
+                                        <th style="text-align: center;">Status Gizi</th>
+                                        <th style="text-align: center;">Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -129,15 +124,7 @@
                                         <td>{{ $datas2->status_gizi }}</td>
                                         <td>{{ $datas2->ket_timbang }}</td>
                                         <td>
-                                            <form action="{{ route('timbang.destroy', $datas2->id_timbang) }}" method="post">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <div class="btn-group">
-                                                    <a href="{{ route('statusgizi.edit', $datas2->id_timbang) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
-                                                </div>
-
-                                            </form>
+                                            <a href="{{ route('statusgizi.show', $datas2->id_timbang) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Detail"><span class="glyphicon glyphicon-info-sign"></span></a>
                                         </td>
                                     </tr>
                                     @endforeach

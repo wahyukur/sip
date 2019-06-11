@@ -19,6 +19,7 @@ class CreateKehadiransTable extends Migration
             $table->unsignedInteger('id_anak');
             $table->string('alasan');
             $table->date('tgl_kunjungan');
+            $table->string('ket_hadir')->nullable();
             $table->timestamps();
             $table->foreign('id_anak')->references('id_anak')->on('anaks');
             $table->foreign('id_kegiatan')->references('id_kegiatan')->on('kegiatans');

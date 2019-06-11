@@ -1,10 +1,10 @@
 @extends('layouts.base')
 
 @section('css')
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="{!! asset('plugins/iCheck/all.css') !!}">
 <!-- Select2 -->
 <link rel="stylesheet" href="{!! asset('bower_components/select2/dist/css/select2.min.css') !!}">
-<!-- Image Picker -->
-<link rel="stylesheet" href="{!! asset('bower_components/image-picker/image-picker/image-picker.css') !!}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{!! asset('dist/css/AdminLTE.min.css') !!}">
 @endsection
@@ -37,7 +37,7 @@
 								<label class="col-md-4 control-label" for="id_agenda">Nama Kegiatan</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-tasks fa-fw"></i></span>
 										<select class="form-control select2" name="id_agenda" style="width: 100%;" required>
 											<option selected="selected" value="">-- Nama Kegiatan --</option>
 											@foreach($data as $datas)
@@ -53,7 +53,7 @@
 								<label class="col-md-4 control-label" for="id_tamu">Nama Tamu</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+										<span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
 										<select class="form-control select2" name="id_tamu" style="width: 100%;" required>
 											<option selected="selected" value="">-- Nama Tamu --</option>
 											@foreach($data2 as $datas2)
@@ -69,11 +69,11 @@
 								<label class="col-md-4 control-label" for="id_ukm">Nama UKM</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+										<span class="input-group-addon"><i class="fa fa-cutlery fa-fw"></i></span>
 										<select class="form-control select2" name="id_ukm" style="width: 100%;" required>
 											<option selected="selected" value="">-- Nama UKM --</option>
-											@foreach($data5 as $datas5)
-												<option value="{{ $datas5->id_ukm }}">{{ $datas5->nama_ukm }}</option>
+											@foreach($data3 as $datas3)
+												<option value="{{ $datas3->id_ukm }}">{{ $datas3->nama_ukm }}</option>
 											@endforeach
 										</select>
 									</div>
@@ -85,7 +85,7 @@
 								<label class="col-md-4 control-label" for="id_pkk">Nama Ketua PKK</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+										<span class="input-group-addon"><i class="fa fa-id-badge fa-fw"></i></span>
 										<select class="form-control select2" name="id_pkk" style="width: 100%;" required>
 											<option selected="selected" value="">-- Nama Ketua PKK --</option>
 											@foreach($data4 as $datas4)
@@ -104,11 +104,11 @@
 										<div class="row">
 											<div class="col-md-6">
 												<img src="{!! asset('dist/img/placehold.jpg') !!}" id="showgambar" style="max-width:200px;max-height:200px;float:left;margin-bottom: 10px;" />
-												<input type="file" id="inputgambar" class="form-control validate" name="gambar_kegiatan1">
+												<input type="file" id="inputgambar" class="form-control validate" name="gambar_kegiatan1" required>
 											</div>
 											<div class="col-md-6">
 												<img src="{!! asset('dist/img/placehold.jpg') !!}" id="showgambar1" style="max-width:200px;max-height:200px;float:left;margin-bottom: 10px;" />
-												<input type="file" id="inputgambar1" class="form-control validate" name="gambar_kegiatan2">
+												<input type="file" id="inputgambar1" class="form-control validate" name="gambar_kegiatan2" required>
 											</div>
 										</div>
 									</div>
@@ -123,31 +123,17 @@
 										<div class="row">
 											<div class="col-md-6">
 												<img src="{!! asset('dist/img/placehold.jpg') !!}" id="showgambar2" style="max-width:200px;max-height:200px;float:left;margin-bottom: 10px;" />
-												<input type="file" id="inputgambar2" class="form-control validate" name="pmt1">
+												<input type="file" id="inputgambar2" class="form-control validate" name="pmt1" required>
 											</div>
 											<div class="col-md-6">
 												<img src="{!! asset('dist/img/placehold.jpg') !!}" id="showgambar3" style="max-width:200px;max-height:200px;float:left;margin-bottom: 10px;" />
-												<input type="file" id="inputgambar3" class="form-control validate" name="pmt2">
+												<input type="file" id="inputgambar3" class="form-control validate" name="pmt2" required>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<!-- <div class="form-group">
-							<div class="row">
-								<label class="col-md-4 control-label" for="gambar_kegiatan1">Gambar Kegiatan</label>
-								<div class="input-group col-md-8">
-									<div class="input-group">
-										<div class="row">
-											<div class="col-md-6">
-												<button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myModal">Pilih Gambar</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> -->
 						<div class="form-group">
 							<div class="row">
 								<label class="col-md-4 control-label" for="name"></label>
@@ -191,24 +177,6 @@
 								<button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
 							</div>
 						</div>
-						<!-- tab content -->
-						<div class="tab-content">
-							<div id="home" class="tab-pane fade in active">
-								<div class="row">
-									<div class="col-md-12" style="padding-top: 20px">
-										@foreach($data3 as $datas3)
-										<select class="image-picker show-labels show-html" data-limit="2" multiple="multiple">
-										  	<option data-img-src="{!! asset('$datas3->image') !!}" value="{{ $datas3->id }}">{{ $datas3->title }}-{{ $datas3->image }}</option>
-										</select>
-										@endforeach
-									</div>
-								</div>
-							</div>
-							<div id="menu1" class="tab-pane fade">
-								<h3>Menu 1</h3>
-								<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -220,13 +188,17 @@
 @section('java')
 <!-- Select2 -->
 <script src="{!! asset('bower_components/select2/dist/js/select2.full.min.js') !!}"></script>
-<!-- Image Picker -->
-<script src="{!! asset('bower_components/image-picker/image-picker/image-picker.js') !!}"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{!! asset('plugins/iCheck/icheck.min.js') !!}"></script>
 <script>
 	$(function () {
 		//Initialize Select2 Elements
-		$('.select2').select2();
-		$("select").imagepicker();
+		$('.select2').select2()
+		//iCheck for checkbox and radio inputs
+		$('input[type="radio"].minimal').iCheck({
+			checkboxClass: 'icheckbox_minimal-blue',
+			radioClass   : 'iradio_minimal-blue'
+		})
 	})
 </script>
 <script type="text/javascript">

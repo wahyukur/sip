@@ -16,13 +16,15 @@ class CreateTimbangsTable extends Migration
         Schema::create('timbangs', function (Blueprint $table) {
             $table->increments('id_timbang');
             $table->unsignedInteger('id_anak');
-            $table->string('nama_ortu');
             $table->integer('umur');
             $table->float('berat_badan');
-            $table->integer('tinggi_badan');
+            $table->float('tinggi_badan');
             $table->date('tgl_timbang');
             $table->string('status_gizi');
             $table->string('ket_timbang');
+            $table->string('ind_naik');
+            $table->tinyInteger('ind_t_lalu');
+            $table->tinyInteger('ind_b_lalu');
             //gibur & gileb
             $table->string('gibur_klinis')->nullable();
             $table->string('st_gizi_bbtb')->nullable();

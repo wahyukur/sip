@@ -34,7 +34,7 @@
 								<label class="col-md-4 control-label" for="nama_ukm">Nama UKM</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
 										<input type="text" class="form-control" name="nama_ukm" value="{{ $datas->nama_ukm }}" required>
 									</div>
 								</div>
@@ -45,7 +45,7 @@
 								<label class="col-md-4 control-label" for="nama_pemilik">Nama Pemilik</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
 										<input type="text" class="form-control" name="nama_pemilik" value="{{ $datas->nama_pemilik }}" required>
 									</div>
 								</div>
@@ -56,7 +56,7 @@
 								<label class="col-md-4 control-label" for="notelp">Nomor Telpon</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
 										<input type="number" class="form-control" name="notelp" value="{{ $datas->notelp }}" required>
 									</div>
 								</div>
@@ -64,10 +64,10 @@
 						</div>
 						<div class="form-group">
 							<div class="row">
-								<label class="col-md-4 control-label" for="alamat_ukm">Nomor Telpon</label>
+								<label class="col-md-4 control-label" for="alamat_ukm">Alamat</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
 										<textarea class="form-control" rows="4" name="alamat_ukm" required>{{ $datas->alamat_ukm }}</textarea>
 									</div>
 								</div>

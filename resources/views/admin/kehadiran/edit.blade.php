@@ -97,6 +97,19 @@
 						</div>
 						<div class="form-group">
 							<div class="row">
+								<label class="col-md-4 control-label" for="ket_hadir">Keterangan</label>
+								<div class="input-group col-md-8">
+									<div class="input-group date">
+										<div class="input-group-addon">
+											<i class="fa fa-pencil"></i>
+										</div>
+										<textarea class="form-control" rows="3" placeholder="Enter ..." name="ket_hadir">{{ $datas->ket_hadir }}</textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
 								<label class="col-md-4 control-label" for="name"></label>
 								<div class="input-group col-md-8">
 									<button type="submit" class="btn btn-primary" style="margin-right: 6px;">Simpan</button>

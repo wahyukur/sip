@@ -189,7 +189,7 @@ $(function () {
     // Layout options
     $demoSettings.append(
         '<h4 class="control-sidebar-heading">'
-        + 'Layout Options'
+        + 'Layout Optionssssss'
         + '</h4>'
         // Fixed layout
         + '<div class="form-group">'

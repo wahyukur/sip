@@ -12,11 +12,13 @@
 */
 
 // route auth login dan register
-// Auth::routes();
+Auth::routes();
 
 Route::middleware(['guest'])->group(function(){
 	Route::get('/', 'AuthController@getLogin')->name('login');
 	Route::post('postlogin', 'AuthController@postLogin')->name('postlogin');
+	Route::get('resetPassword', 'AuthController@resetPassword')->name('resetPassword');
+	Route::post('postReset', 'AuthController@postReset')->name('postReset');
 });
 
 Route::middleware(['web', 'auth'])->group(function(){
@@ -29,8 +31,9 @@ Route::middleware(['web', 'auth'])->group(function(){
 		Route::post('bumil_meninggal', 'IbuHamilController@meninggal')->name('bumil_meninggal');
 		Route::post('bumil_melahirkan', 'IbuHamilController@melahirkan')->name('bumil_melahirkan');
 		Route::resource('kader', 'KaderController');
+		Route::post('kaderStore1', 'KaderController@store1')->name('kaderStore1');
 		Route::resource('pengguna', 'PenggunaController');
-		// Route::get('userDetail/{id}', 'PenggunaController@profile')->name('userDetail');
+		Route::get('generatePwd/{id}', 'PenggunaController@generatePwd')->name('generatePwd');
 		Route::resource('agenda', 'AgendaController');
 		Route::resource('bukutamu', 'BukuTamuController');
 		Route::resource('timbang', 'TimbangController');
@@ -78,6 +81,13 @@ Route::middleware(['web', 'auth'])->group(function(){
 		Route::get('addImage/{id}', 'AgendaController@addImage')->name('addImage');
 		Route::post('storeImage', 'AgendaController@storeImage')->name('storeImage');
 		Route::get('deleteImage/{id}', 'AgendaController@deleteImage')->name('deleteImage');
+		
+		Route::get('printAbsen/{id}', 'AgendaController@printAbsen')->name('printAbsen');
+		/////////////
+
+		// Export Excel
+		Route::get('exportIbu', 'IbuController@exportIbu')->name('exportIbu');
+		Route::get('exportAnak', 'AnakController@exportAnak')->name('exportAnak');
 		/////////////
 	});
 
@@ -87,6 +97,8 @@ Route::middleware(['web', 'auth'])->group(function(){
 		})->name('user');
 	});
 
+	Route::get('getProfile', 'DashboardController@getProfile')->name('getProfile');
+	Route::post('postProfile', 'DashboardController@postProfile')->name('postProfile');
 	Route::get('logout', 'DashboardController@getLogout')->name('logout');
 });
 

@@ -9,6 +9,8 @@ use App\Galeri;
 use App\Album;
 use Illuminate\Support\Facades\File;
 use DB;
+use PDF;
+use Illuminate\Support\Carbon;
 
 class AgendaController extends Controller
 {
@@ -21,8 +23,7 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $agendas = [];
         $data = Agenda::all();
         if($data->count()) {
@@ -79,9 +80,46 @@ class AgendaController extends Controller
         $data->tempat     = $request->get('tempat');
         $data->start      = $request->get('start');
         $data->end        = $request->get('end');
+        $data->j_kegiatan = $request->get('j_kegiatan');
         $data->color      = $request->get('color');
         $data->keterangan = $request->get('keterangan');
         $data->save();
+
+        //Push Notif
+        $field=[];
+        $kegiatan = $request->get('kegiatan');
+        $tgl = date('d/m Y', strtotime($request->get('start')));
+        $tmpt = $request->get('tempat');
+        $user = DB::table('users')
+                ->select('expo_token')
+                ->get();
+
+        foreach ($user as $users) {
+            if ($users->expo_token != null) {
+                array_push($field, [
+                    "to" => $users->expo_token,
+                    "title" => $kegiatan,
+                    "body" => $tgl.' di '.$tmpt
+                ]);
+            }
+        }
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL,"https://exp.host/--/api/v2/push/send");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Accept-encoding: gzip, deflate', 'Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($field));
+
+        // Receive server response ...
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $server_output = curl_exec($ch);
+        curl_close ($ch);
+
+        // echo $server_output;
+
+        // if ($server_output-> == "OK") { ... } else { ... }
+        ///////
 
         return redirect()->route('agenda.index')->with(['success' => 'Data Berhasil Di Tambah']);
     }
@@ -123,9 +161,41 @@ class AgendaController extends Controller
         $data->tempat     = $request->get('tempat');
         $data->start      = $request->get('start');
         $data->end        = $request->get('end');
+        $data->j_kegiatan = $request->get('j_kegiatan');
         $data->color      = $request->get('color');
         $data->keterangan = $request->get('keterangan');
         $data->save();
+
+        //Push Notif
+        $field=[];
+        $kegiatan = $request->get('kegiatan');
+        $tgl = date('d/m Y', strtotime($request->get('start')));
+        $tmpt = $request->get('tempat');
+        $user = DB::table('users')
+                ->select('expo_token')
+                ->get();
+
+        foreach ($user as $users) {
+            if ($users->expo_token != null) {
+                array_push($field, [
+                    "to" => $users->expo_token,
+                    "title" => $kegiatan,
+                    "body" => $tgl.' di '.$tmpt
+                ]);
+            }
+        }
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL,"https://exp.host/--/api/v2/push/send");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Accept-encoding: gzip, deflate', 'Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($field));
+
+        // Receive server response ...
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $server_output = curl_exec($ch);
+        curl_close ($ch);
 
         return redirect()->route('agenda.index')->with(['success' => 'Data Berhasil Di Update']);
     }
@@ -223,4 +293,20 @@ class AgendaController extends Controller
         return redirect()->route('albumDetail', $id)->with(['success' => 'Data Berhasil Di Hapus']);
     }
     // Image COntroller /////////////////
+
+    ///// CETAK ABSEN PDF
+    public function printAbsen($id)
+    {
+        $data = DB::table('agendas')
+            ->where('id_agenda', $id)
+            ->first();
+        $data1 = DB::table('anaks as A')
+                ->select('A.nama_anak', 'A.jenis_kelamin', 'I.nama_ibu', 'I.nama_suami', 'I.alamat', 'I.rt')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
+                ->get();
+        // dd($data1);
+        $pdf = PDF::loadView('admin.agenda.form_absen', compact('data','data1'));
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream('Absensi.pdf', array("Attachment" => false));
+    }
 }

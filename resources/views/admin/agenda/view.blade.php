@@ -32,7 +32,7 @@
                 <h3 class="box-title">Buat Agenda</h3>
             </div>
             <div class="box-body">
-                <form method="post" action="{{ route('agenda.store') }}">
+                <form method="post" action="{{ route('agenda.store') }}" autocomplete="off">
                     @csrf
                     <div class="form-group">
                         <label for="kegiatan">Nama Kegiatan:</label>
@@ -57,6 +57,19 @@
                             <input type="text" class="form-control pull-right" id="datetimepicker2" name="end" required autocomplete="off">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="j_kegiatan">Jenis Kegiatan</label>
+                        <div class="input-group">
+                            <div class="form-check-inline">
+                                <label class="form-check-label" style="padding: 6px 10px 0px 0px;">
+                                    <input type="radio" name="j_kegiatan" class="form-check-input minimal" value="0" required> Rutin
+                                </label>
+                                <label class="form-check-label">
+                                    <input type="radio" name="j_kegiatan" class="form-check-input minimal" value="1" required> Tambahan
+                                </label>
                             </div>
                         </div>
                     </div>

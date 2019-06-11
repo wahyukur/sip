@@ -34,7 +34,7 @@
 								<label class="col-md-4 control-label" for="nama_ketua">Nama Ketua</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
 										<input type="text" class="form-control" name="nama_ketua" value="{{ $datas->nama_ketua }}" required>
 									</div>
 								</div>
@@ -45,7 +45,7 @@
 								<label class="col-md-4 control-label" for="notelp_ketua">Nomor Telpon</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
 										<input type="text" class="form-control" name="notelp_ketua" value="{{ $datas->notelp_ketua }}" required>
 									</div>
 								</div>
@@ -53,10 +53,10 @@
 						</div>
 						<div class="form-group">
 							<div class="row">
-								<label class="col-md-4 control-label" for="alamat_ketua">Nomor Telpon</label>
+								<label class="col-md-4 control-label" for="alamat_ketua">Alamat</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-child"></i></span>
+										<span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
 										<textarea class="form-control" rows="4" name="alamat_ketua" required>{{ $datas->alamat_ketua }}</textarea>
 									</div>
 								</div>

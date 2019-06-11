@@ -25,7 +25,7 @@
 			<div class="row">
 				<div class="col-md-9">
 					@foreach($data as $datas)
-					<form class="form-horizontal" method="post" action="{{ route('ibu.update', $datas->id_ibu) }}">
+					<form class="form-horizontal" method="post" action="{{ route('ibu.update', $datas->id) }}">
 						@csrf
 						<input name="_method" type="hidden" value="PATCH" />
 						<div class="form-group">
@@ -107,7 +107,7 @@
 								<div class="input-group col-md-8">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
-										<input type="number" class="form-control" placeholder="Nomor Telpon" name="No_tlp" value="{{ $datas->No_tlp }}" required>
+										<input type="number" class="form-control" placeholder="Nomor Telpon" name="No_tlp" value="{{ $datas->No_tlp }}">
 									</div>
 								</div>
 							</div>
@@ -118,7 +118,32 @@
 								<div class="input-group col-md-8">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-user-secret"></i></span>
-										<input type="text" class="form-control" placeholder="Agama" name="agama" value="{{ $datas->agama }}" required>
+										<select class="form-control" name="agama" style="width: 100%;" required>
+											<option selected="selected" value="{{ $datas->agama }}">
+												@if ($datas->agama == 0)
+		                                            Islam
+		                                        @elseif ($datas->agama == 1)
+		                                            Kristen
+		                                        @elseif ($datas->agama == 2)
+		                                            Katolik
+		                                        @elseif ($datas->agama == 3)
+		                                            Hindu
+		                                        @elseif ($datas->agama == 4)
+		                                            Buddha
+		                                        @elseif ($datas->agama == 5)
+		                                            Kong Hu Cu
+		                                        @else
+		                                            Null
+		                                        @endif
+											</option>
+											<option value="">-- Agama --</option>
+											<option value="0">Islam</option>
+											<option value="1">Kristen</option>
+											<option value="2">Katolik</option>
+											<option value="3">Hindu</option>
+											<option value="4">Buddha</option>
+											<option value="5">Kong Hu Cu</option>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -162,16 +187,10 @@
 								<div class="input-group col-md-8">
 									<div class="form-check-inline">
 										<label class="form-check-label" style="padding: 6px 10px 0px 0px;">
-											<input type="radio" name="gakin" class="form-check-input minimal" value="Non Gakin" checked="
-											@if ($datas->gakin == 'Non Gakin')
-												checked;
-											@endif"> Non Gakin
+											<input type="radio" name="gakin" class="form-check-input minimal" value="0" <?php echo ($datas->gakin == '0')?'checked':'' ?> > Non Gakin
 										</label>
 										<label class="form-check-label">
-											<input type="radio" name="gakin" class="form-check-input minimal" value="Gakin" checked="
-											@if ($datas->gakin == 'Gakin')
-												checked;
-											@endif"> Gakin
+											<input type="radio" name="gakin" class="form-check-input minimal" value="1" <?php echo ($datas->gakin == '1')?'checked':'' ?> > Gakin
 										</label>
 									</div>
 								</div>

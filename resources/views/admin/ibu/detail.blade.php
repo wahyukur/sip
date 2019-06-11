@@ -31,10 +31,21 @@
 						<b>Tempat Lahir</b> <a class="pull-right">{{ $datas->tempat_lahir }}</a>
 					</li>
 					<li class="list-group-item">
-						<b>Tanggal Lahir</b> <a class="pull-right">{{ $datas->tgl_lahir }}</a>
+						<b>Tanggal Lahir</b> <a class="pull-right">
+                            @php
+                                $date = date("d-m-Y", strtotime($datas->tgl_lahir))
+                            @endphp
+                            {{ $date }}
+                        </a>
 					</li>
 					<li class="list-group-item">
-						<b>No. Telp</b> <a class="pull-right">{{ $datas->No_tlp }}</a>
+						<b>No. Telp</b> <a class="pull-right">
+                            @if ($datas->No_tlp == null)
+                                Tidak Ada
+                            @else
+                                {{ $datas->No_tlp }}
+                            @endif
+                        </a>
 					</li>
 				</ul>
 				<a href="{{ route('ibu.index') }}" class="btn btn-primary btn-block"><b>Kembali</b></a>
@@ -61,7 +72,7 @@
             						@php
             							$date = date("d M. Y", strtotime($datas->created_at))
             						@endphp
-            						{{ $date }}
+            						Terdaftar Pada {{ $date }}
             					</span>
             				</li>
             				<!-- /.timeline-label -->
@@ -90,7 +101,22 @@
             					<i class="fa fa-user-secret bg-aqua"></i>
             					<div class="timeline-item">
             						<h3 class="timeline-header no-border">
-            							<a href="#">Agama : </a> {{ $datas->agama }}
+            							<a href="#">Agama : </a>
+                                        @if ($datas->agama == 0)
+                                            Islam
+                                        @elseif ($datas->agama == 1)
+                                            Kristen
+                                        @elseif ($datas->agama == 2)
+                                            Katolik
+                                        @elseif ($datas->agama == 3)
+                                            Hindu
+                                        @elseif ($datas->agama == 4)
+                                            Buddha
+                                        @elseif ($datas->agama == 5)
+                                            Kong Hu Cu
+                                        @else
+                                            Null
+                                        @endif
             						</h3>
             					</div>
             				</li>
@@ -135,7 +161,12 @@
             					<i class="fa fa-user bg-green"></i>
             					<div class="timeline-item">
             						<h3 class="timeline-header no-border">
-            							<a href="#">Status Gakin : </a> {{ $datas->gakin }}
+            							<a href="#">Status Gakin : </a>
+                                        @if ($datas->gakin == 0)
+                                            Non Gakin
+                                        @else
+                                            Gakin
+                                        @endif
             						</h3>
             					</div>
             				</li>

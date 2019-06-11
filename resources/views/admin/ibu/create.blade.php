@@ -71,7 +71,7 @@
 								<div class="input-group col-md-8">
 									<div class="input-group" style="padding-right: 6px;">
 										<span class="input-group-addon"><i class="fa fa-address-card"></i></span>
-										<input type="text" class="form-control" placeholder="Alamat" name="alamat" required>
+										<input type="text" class="form-control" placeholder="Alamat" value="Sumberejo 1" name="alamat" required>
 									</div>
 									<div class="input-group col-xs-2" style="padding-right: 6px;">
 										<span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
@@ -79,7 +79,7 @@
 									</div>
 									<div class="input-group col-xs-2">
 										<span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
-										<input type="number" class="form-control" placeholder="Rw" name="rw" required>
+										<input type="number" class="form-control" placeholder="Rw" name="rw" value="1" required>
 									</div>
 								</div>
 							</div>
@@ -90,22 +90,11 @@
 								<div class="input-group col-md-8">
 									<div class="input-group" style="padding-right: 6px;">
 										<span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
-										<input type="text" class="form-control" placeholder="Kelurahan" name="kelurahan" required>
+										<input type="text" class="form-control" placeholder="Kelurahan" value="Sumberejo" name="kelurahan" required>
 									</div>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
-										<input type="text" class="form-control" placeholder="Kecamatan" name="kecamatan" required>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="row">
-								<label class="col-md-4 control-label" for="notelp">Nomor Telpon</label>
-								<div class="input-group col-md-8">
-									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
-										<input type="number" class="form-control" placeholder="Nomor Telpon" name="No_tlp" required>
+										<input type="text" class="form-control" placeholder="Kecamatan" value="Pakal" name="kecamatan" required>
 									</div>
 								</div>
 							</div>
@@ -116,7 +105,15 @@
 								<div class="input-group col-md-8">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-user-secret"></i></span>
-										<input type="text" class="form-control" placeholder="Agama" name="agama" required>
+										<select class="form-control" name="agama" style="width: 100%;" required>
+											<option selected="selected" value="">-- Agama --</option>
+											<option value="0">Islam</option>
+											<option value="1">Kristen</option>
+											<option value="2">Katolik</option>
+											<option value="3">Hindu</option>
+											<option value="4">Buddha</option>
+											<option value="5">Kong Hu Cu</option>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -160,11 +157,22 @@
 								<div class="input-group col-md-8">
 									<div class="form-check-inline">
 										<label class="form-check-label" style="padding: 6px 10px 0px 0px;">
-											<input type="radio" name="gakin" class="form-check-input minimal" value="Non Gakin" required> Non Gakin
+											<input type="radio" name="gakin" class="form-check-input minimal" value="0" required> Non Gakin
 										</label>
 										<label class="form-check-label">
-											<input type="radio" name="gakin" class="form-check-input minimal" value="Gakin" required> Gakin
+											<input type="radio" name="gakin" class="form-check-input minimal" value="1" required> Gakin
 										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<label class="col-md-4 control-label" for="notelp">Nomor Telpon</label>
+								<div class="input-group col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
+										<input type="number" class="form-control" placeholder="Nomor Telpon" name="No_tlp">
 									</div>
 								</div>
 							</div>

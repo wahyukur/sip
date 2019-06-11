@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Kader;
+use Illuminate\Support\Facades\DB;
+use App\User;
 
 class KaderController extends Controller
 {
@@ -18,7 +19,10 @@ class KaderController extends Controller
      */
     public function index()
     {
-        $data = Kader::all();
+        $data = DB::table('users')
+                ->where('jabatan', '>', 0)
+                ->orderBy('jabatan', 'asc')
+                ->get();
         return view('admin.kader.view', compact('data'));
     }
 
@@ -29,8 +33,10 @@ class KaderController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.kader.create');
+        $data = DB::table('users')
+                ->where('jabatan', '=', 0)
+                ->get();
+        return view('admin.kader.create', compact('data'));
     }
 
     /**
@@ -41,13 +47,35 @@ class KaderController extends Controller
      */
     public function store(Request $request)
     {
-        //
         // menerima data request
-        $data             = new Kader;
-        $data->nama_kader = $request->get('nama_kader');
-        $data->alamat     = $request->get('alamat');
-        $data->jabatan    = $request->get('jabatan');
-        $data->no_telp    = $request->get('no_telp');
+        $data               = new User;
+        $data->nama_ibu     = $request->get('nama_ibu');
+        $data->nama_suami   = $request->get('nama_suami');
+        $data->tempat_lahir = $request->get('tempat_lahir');
+        $data->tgl_lahir    = $request->get('tgl_lahir');
+        $data->alamat       = $request->get('alamat');
+        $data->rt           = $request->get('rt');
+        $data->rw           = $request->get('rw');
+        $data->kelurahan    = $request->get('kelurahan');
+        $data->kecamatan    = $request->get('kecamatan');
+        $data->No_tlp       = $request->get('No_tlp');
+        $data->agama        = $request->get('agama');
+        $data->NIK          = $request->get('NIK');
+        $data->No_KK        = $request->get('No_KK');
+        $data->No_BPJS      = $request->get('No_BPJS');
+        $data->gakin        = $request->get('gakin');
+        $data->jabatan      = $request->get('jabatan');
+        $data->email        = strtolower(str_random(9));
+        $data->password     = strtolower(str_random(9));
+        $data->save();
+
+        return redirect()->route('kader.index')->with(['success' => 'Data Berhasil Di Tambah']);
+    }
+    public function store1(Request $request)
+    {
+        $id = $request->get('id');
+        $data = User::where('id', $id)->first();
+        $data->jabatan = $request->get('jabatan');
         $data->save();
 
         return redirect()->route('kader.index')->with(['success' => 'Data Berhasil Di Tambah']);
@@ -61,7 +89,8 @@ class KaderController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = User::where('id', $id)->get();
+        return view('admin.kader.detail', compact('data'));
     }
 
     /**
@@ -73,7 +102,7 @@ class KaderController extends Controller
     public function edit($id)
     {
         //
-        $data = Kader::where('id_kader', $id)->get();
+        $data = User::where('id', $id)->get();
         return view('admin.kader.edit', compact('data'));
     }
 
@@ -87,11 +116,23 @@ class KaderController extends Controller
     public function update(Request $request, $id)
     {
         // menerima data request
-        $data = Kader::where('id_kader', $id)->first();
-        $data->nama_kader = $request->get('nama_kader');
-        $data->alamat     = $request->get('alamat');
-        $data->jabatan    = $request->get('jabatan');
-        $data->no_telp    = $request->get('no_telp');
+        $data = User::where('id', $id)->first();
+        $data->nama_ibu     = $request->get('nama_ibu');
+        $data->nama_suami   = $request->get('nama_suami');
+        $data->tempat_lahir = $request->get('tempat_lahir');
+        $data->tgl_lahir    = $request->get('tgl_lahir');
+        $data->alamat       = $request->get('alamat');
+        $data->rt           = $request->get('rt');
+        $data->rw           = $request->get('rw');
+        $data->kelurahan    = $request->get('kelurahan');
+        $data->kecamatan    = $request->get('kecamatan');
+        $data->No_tlp       = $request->get('No_tlp');
+        $data->agama        = $request->get('agama');
+        $data->NIK          = $request->get('NIK');
+        $data->No_KK        = $request->get('No_KK');
+        $data->No_BPJS      = $request->get('No_BPJS');
+        $data->gakin        = $request->get('gakin');
+        $data->jabatan      = $request->get('jabatan');
         $data->save();
 
         return redirect()->route('kader.index')->with(['success' => 'Data Berhasil Di Update']);

@@ -41,27 +41,27 @@
             </td>
         </tr>
     </table>
-    <table width="100%" style="font-size: 11px">
+    <table style="font-size: 11px; width: 100%">
         <tr>
-            <th>DI POSYANDU</th>
+            <th style="width: 25%">DI POSYANDU</th>
             <td>: Mandiri</td>
             <th>Jumlah Balita Riil</th>
-            <td>: </td>
+            <td>: {{ $data1 }}</td>
         </tr>
         <tr>
-            <th>RT</th>
+            <th style="width: 25%">RT</th>
             <td>: 01-04</td>
             <th>Jumlah Balita yg dpt PMT dari Puskesmas</th>
             <td>: </td>
         </tr>
         <tr>
-            <th>RW</th>
+            <th style="width: 25%">RW</th>
             <td>: 01</td>
             <th>Jumlah Balita yg tidak Hadir</th>
-            <td></td>
+            <td>: {{ count($data) }}</td>
         </tr>
         <tr>
-            <th>KELURAHAN</th>
+            <th style="width: 25%">KELURAHAN</th>
             <td>: Sumberejo</td>
             <th></th>
             <td></td>
@@ -78,6 +78,7 @@
                 <th rowspan="2" style="border: 1px solid black">TB CM</th>
                 <th rowspan="2" style="border: 1px solid black">STATUS GIZI (BB/U)</th>
                 <th colspan="5" style="border: 1px solid black">DIISI TANGGAL SAAT DIKUNJUNGI</th>
+                <th rowspan="2" style="border: 1px solid black">KETERANGAN</th>
                 <th rowspan="2" style="border: 1px solid black">TANDA TANGAN YG DIKUNJUNGI</th>
             </tr>
             <tr>
@@ -89,23 +90,104 @@
             </tr>
         </thead>
         <tbody>
-            @for ($i = 1; $i < 34; $i++)
+            @if(count($data) >= 1)
+                @php $no = 1; @endphp
+                @foreach($data as $datas)
                 <tr>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
-                    <td style="border: 1px solid black; color: white">A</td>
+                    <td style="border: 1px solid black;">{{ $no++ }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->nama_anak }}</td>
+                    <td style="border: 1px solid black;">
+                        @if ($datas->jenis_kelamin == 0)
+                            L
+                        @else
+                            P
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">
+                        @php
+                        $date = date("Y-m-d");
+                        $timeStart = strtotime("$datas->tgl_lhr");
+                        $timeEnd = strtotime("$date");
+                        // Menambah bulan ini + semua bulan pada tahun sebelumnya
+                        $numBulan = (date("Y",$timeEnd)-date("Y",$timeStart))*12;
+                        // menghitung selisih bulan
+                        $numBulan += date("m",$timeEnd)-date("m",$timeStart);
+
+                        echo $numBulan;
+                        @endphp
+                        Bulan
+                    </td>
+                    <td style="border: 1px solid black;">{{ $datas->berat_badan }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->tinggi_badan }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->status_gizi }}</td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->alasan == 'Ketiduran')
+                            {{ date('d/m/y', strtotime($datas->tgl_kunjungan)) }}
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->alasan == 'Pergi')
+                            {{ date('d/m/y', strtotime($datas->tgl_kunjungan)) }}
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->alasan == 'Sakit')
+                            {{ date('d/m/y', strtotime($datas->tgl_kunjungan)) }}
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->alasan == 'Lupa')
+                            {{ date('d/m/y', strtotime($datas->tgl_kunjungan)) }}
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->alasan == 'DLL')
+                            {{ date('d/m/y', strtotime($datas->tgl_kunjungan)) }}
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">{{ $datas->ket_hadir }}</td>
+                    <td style="border: 1px solid black;">TTD</td>
                 </tr>
-            @endfor
+                @endforeach
+                @for ($i = 1; $i < 34-count($data); $i++)
+                    <tr>
+                        <td style="border: 1px solid black">{{ $no++ }}</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                    </tr>
+                @endfor
+            @else
+                @php $no = 1; @endphp
+                @for ($i = 1; $i < 34; $i++)
+                    <tr>
+                        <td style="border: 1px solid black">{{ $no++ }}</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                        <td style="border: 1px solid black; color: white">A</td>
+                    </tr>
+                @endfor
+            @endif
         </tbody>
     </table>
 
@@ -114,7 +196,25 @@
         <tr>
             <td style="padding-left: 30px">Mengetahui</td>
             <td></td>
-            <td style="padding-left: 270px">Surabaya, ..................</td>
+            <td style="padding-left: 270px">
+                Surabaya, 
+                @php
+                    function tgl_indon($tanggal){
+                        $bulan = array (
+                            1 =>   'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'
+                        );
+                        $pecahkan = explode('-', $tanggal);
+    
+                        // variabel pecahkan 0 = tanggal
+                        // variabel pecahkan 1 = bulan
+                        // variabel pecahkan 2 = tahun
+ 
+                        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+                    }
+                    $a = tgl_indon(date('Y-m-d'));
+                @endphp
+                {{ $a }}
+            </td>
         </tr>
         <tr>
             <td style="padding-left: 30px">Ketua Kader Posyandu</td>

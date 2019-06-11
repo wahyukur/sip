@@ -21,7 +21,7 @@ class VitAController extends Controller
     {
         $data = DB::table('vit_as as V')
                 ->leftjoin('anaks as A', 'V.id_anak', '=', 'A.id_anak')
-                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
                 ->select('V.id_vitA', 'A.nama_anak', 'A.jenis_kelamin', 'A.tgl_lhr', 'I.alamat', 'I.rt', 'I.rw', 'V.tgl_vitA', 'V.keterangan')
                 ->orderBy('tgl_vitA', 'desc')
                 ->get();
@@ -70,11 +70,11 @@ class VitAController extends Controller
     {
         $data = DB::table('vit_as as V')
                 ->leftjoin('anaks as A', 'V.id_anak', '=', 'A.id_anak')
-                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
                 ->where('V.id_vitA', $id)
                 ->first();
         $data2 = DB::table('anaks as A')
-                ->leftjoin('ibus as I', 'A.id_ibu', '=', 'I.id_ibu')
+                ->leftjoin('users as I', 'A.id_ibu', '=', 'I.id')
                 ->orderBy('nama_anak', 'asc')
                 ->get();
         return view('admin.vitA.edit', compact('data', 'data2'));

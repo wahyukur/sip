@@ -31,12 +31,12 @@
                 <table id="example1" class="table table-bordered table-striped" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th style="width: 5%;">#</th>
-                            <th style="width: 20%;">Nama Tamu</th>
-                            <th style="width: 20%;">Alamat</th>
-                            <th style="width: 20%;">Jabatan</th>
-                            <th style="width: 23%;">Keperluan</th>
-                            <th style="width: 12%;">Aksi</th>
+                            <th style="width: 5%; text-align: center;">#</th>
+                            <th style="width: 20%; text-align: center;">Nama Tamu</th>
+                            <th style="width: 20%; text-align: center;">Alamat</th>
+                            <th style="width: 20%; text-align: center;">Jabatan</th>
+                            <th style="width: 23%; text-align: center;">Keperluan</th>
+                            <th style="width: 12%; text-align: center;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,12 +48,15 @@
                             <td>{{ $datas->alamat }}</td>
                             <td>{{ $datas->jabatan }}</td>
                             <td>{{ $datas->keperluan }}</td>
-                            <td>
+                            <td style="text-align: center;">
                                 <form action="{{ route('bukutamu.destroy', $datas->id_tamu) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <a href="{{ route('bukutamu.edit', $datas->id_tamu) }}" class=" btn btn-sm btn-primary">Edit</a>
-                                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
+                                    <div class="btn-group">
+                                        <a href="{{ route('bukutamu.edit', $datas->id_tamu) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+
+                                        <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </div>
                                 </form>
                             </td>
                         </tr>
@@ -61,12 +64,12 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>#</th>
-                            <th>Nama Tamu</th>
-                            <th>Alamat</th>
-                            <th>Jabatan</th>
-                            <th>Keperluan</th>
-                            <th>Aksi</th>
+                            <th style="text-align: center;">#</th>
+                            <th style="text-align: center;">Nama Tamu</th>
+                            <th style="text-align: center;">Alamat</th>
+                            <th style="text-align: center;">Jabatan</th>
+                            <th style="text-align: center;">Keperluan</th>
+                            <th style="text-align: center;">Aksi</th>
                         </tr>
                     </tfoot>
                 </table>

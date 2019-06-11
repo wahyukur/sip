@@ -29,13 +29,54 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <div class="row" style="margin: 5px;">
+                    @if(count($data) >= 1)
+                        @foreach($data as $datas)
+                            <div class="col-xs-6 col-sm-4 col-md-3">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">{{ $datas->nama_imun }}</h3>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                        <!-- /.box-tools -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        Umur : {{ $datas->umur }} Bulan
+                                        <div class="pull-right">
+                                            <form action="{{ route('jenisimunisasi.destroy', $datas->id_j_imun) }}" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <div class="btn-group">
+                                                    <a href="{{ route('jenisimunisasi.edit', $datas->id_j_imun) }}" class=" btn btn-sm btn-default" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                                    <button class="btn btn-sm btn-default" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="col-12">
+                            <div class="box box-primary">
+                                <div class="box-body">
+                                    <h4 style="text-align: center;">Data Kosong</h4>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <!-- <table id="example1" class="table table-bordered table-striped" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nama Imunisasi</th>
-                            <th>Umur</th>
-                            <th>Aksi</th>
+                            <th style="width: 5%;text-align: center;">#</th>
+                            <th style="width: 35%;text-align: center;">Nama Imunisasi</th>
+                            <th style="width: 35%;text-align: center;">Umur</th>
+                            <th style="width: 25%;text-align: center;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +85,7 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $datas->nama_imun }}</td>
-                            <td>{{ $datas->umur }}</td>
+                            <td>{{ $datas->umur }} Bulan</td>
                             <td>
                                 <form action="{{ route('jenisimunisasi.destroy', $datas->id_j_imun) }}" method="post">
                                     {{ csrf_field() }}
@@ -66,7 +107,7 @@
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
-                </table>
+                </table> -->
             </div>
             <!-- /.box-body -->
         </div>

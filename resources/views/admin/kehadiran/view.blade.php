@@ -7,8 +7,8 @@
 
 @section('breadcrumb')
 <h1>
-    Absensi Kehadiran
-    <small>ketidakhadiran bayi/balita dalam kegiatan</small>
+    Data Kehadiran
+    <small>peserta yang tidak hadir kegiatan rutin</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,7 +24,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title" style="margin-right: 40px"><a href="{{ route('kehadiran.create') }}" class="btn btn-sm btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a> | Kegiatan Posyandu</h3>
+                <h3 class="box-title" style="margin-right: 40px"><a href="{{ route('kehadiran.create') }}" class="btn btn-sm btn-primary"><span><i class="fa fa-plus-square" aria-hidden="true"></i></span> Tambah Data</a> | Kehadiran Peserta</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -47,11 +47,36 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $datas->nama_anak }}</td>
-                            <td>{{ $datas->jenis_kelamin }}</td>
-                            <td>{{ $datas->tgl_lhr }}</td>
+                            <td>
+                                @if ($datas->jenis_kelamin == 0)
+                                    Laki-Laki
+                                @else
+                                    Perempuan
+                                @endif
+                            </td>
+                            <td>
+                                @php
+                                $date = date("Y-m-d");
+                                $timeStart = strtotime("$datas->tgl_lhr");
+                                $timeEnd = strtotime("$date");
+                                // Menambah bulan ini + semua bulan pada tahun sebelumnya
+                                $numBulan = (date("Y",$timeEnd)-date("Y",$timeStart))*12;
+                                // menghitung selisih bulan
+                                $numBulan += date("m",$timeEnd)-date("m",$timeStart);
+
+                                echo $numBulan;
+                                @endphp
+                                Bulan
+                            </td>
                             <td>{{ $datas->alasan }}</td>
                             <td>{{ $datas->tgl_kunjungan }}</td>
-                            <td>ket</td>
+                            <td>
+                                @if ($datas->ket_hadir == null)
+                                    Tidak Ada
+                                @else
+                                    {{ $datas->ket_hadir }}
+                                @endif
+                            </td>
                             <td>
                                 <form action="{{ route('kehadiran.destroy', $datas->id_kehadiran) }}" method="post">
                                     {{ csrf_field() }}

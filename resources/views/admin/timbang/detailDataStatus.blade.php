@@ -48,7 +48,7 @@
     <div class="col-md-9">
     	<div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-            	<li class="active"><a href="#detail" data-toggle="tab">Masukkan Data</a></li>
+            	<li class="active"><a href="#detail" data-toggle="tab">Detail Data</a></li>
             </ul>
             <div class="tab-content">
             	<div class="tab-pane active" id="detail">
@@ -57,6 +57,21 @@
             			<div class="col-md-6">
             				<div class="table-responsive">
 							  	<table class="table">
+							  		<!-- <tr>
+						        		<th>Kasus</th>
+						        		<th> : </th>
+						        		<td>
+						        			@if($data->kasus != null)
+						        				@if ($data->kasus == 1)
+		                                            Baru
+		                                        @else
+		                                            Lama
+		                                        @endif
+						        			@else
+						        				Kosong
+						        			@endif
+						        		</td>
+						      		</tr> -->
 						      		<tr>
 						        		<th>Gizi Buruk Klinis</th>
 						        		<th> : </th>

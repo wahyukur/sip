@@ -19,16 +19,19 @@ class CreateAnaksTable extends Migration
             $table->string('nama_anak');
             $table->string('tempat_lhr');
             $table->date('tgl_lhr');
-            $table->integer('bb_lahir');
-            $table->integer('tb_lahir');
-            $table->string('jenis_kelamin');
+            $table->float('bb_lahir');
+            $table->float('tb_lahir');
+            $table->tinyInteger('jenis_kelamin');
             $table->integer('anak_ke');
             $table->string('jenis_persalinan');
             $table->string('tempat_persalinan');
             $table->string('dokter');
             $table->string('NIK_anak')->nullable();
+            $table->string('BPJS_anak')->nullable();
+            $table->tinyInteger('KMS')->default(0);
+            $table->tinyInteger('state')->default(0);
             $table->timestamps();
-            $table->foreign('id_ibu')->references('id_ibu')->on('ibus');
+            $table->foreign('id_ibu')->references('id')->on('users');
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\JenisImunisasi;
+use Illuminate\Support\Facades\DB;
 
 class JenisImunisasiController extends Controller
 {
@@ -18,7 +19,9 @@ class JenisImunisasiController extends Controller
      */
     public function index()
     {
-        $data = JenisImunisasi::all();
+        $data = DB::table('jenis_imunisasis')
+                ->orderBy('umur', 'asc')
+                ->get();
         return view('admin.jenisimunisasi.view', compact('data'));
     }
 

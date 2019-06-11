@@ -26,6 +26,7 @@ class StatusController extends Controller
                 $query->where('status_gizi', '=', 'BB Lebih')
                       ->orWhere('status_gizi', '=', 'BB Sangat Kurang');
             })
+            ->orderBy('status_gizi', 'desc')
             ->get();
         // dd($data);
         $data2 = DB::table('timbangs as T')
@@ -35,6 +36,7 @@ class StatusController extends Controller
                       ->orWhere('status_gizi', '=', 'BB Sangat Kurang');
             })
             ->get();
+        // dd($data2);
         return view('admin.timbang.viewStatus', compact('data', 'data2'));
     }
 
@@ -67,13 +69,22 @@ class StatusController extends Controller
     public function update(Request $request, $id)
     {
         // menerima data request
-        $data = Anak::where('id_timbang', $id)->first();
-        $data->gibur_klinis = $request->get('gibur_klinis');
-        $data->id_ibu       = $request->get('st_gizi_bbtb');
-        $data->tempat_lhr   = $request->get('penanganan');
-        $data->tgl_lhr      = $request->get('penyebab_utama');
-        $data->bb_lahir     = $request->get('alasan_gibur');
-        $data->tb_lahir     = $request->get('tindakan');
+        $data = Timbang::where('id_timbang', $id)->first();
+        $data->gibur_klinis   = $request->get('gibur_klinis');
+        $data->st_gizi_bbtb   = $request->get('st_gizi_bbtb');
+        if ($request->get('penanganan') == 'other') {
+            $data->penanganan     = $request->get('penanganan1');
+        } else {
+            $data->penanganan     = $request->get('penanganan');
+        }
+        //
+        if ($request->get('penyebab_utama') == 'other') {
+            $data->penyebab_utama     = $request->get('penyebab_utama1');
+        } else {
+            $data->penyebab_utama     = $request->get('penyebab_utama');
+        }
+        $data->alasan_gibur   = $request->get('alasan_gibur');
+        $data->tindakan       = $request->get('tindakan');
         $data->save();
 
         return redirect()->route('statusgizi.index')->with(['success' => 'Data Berhasil Di Update']);
@@ -95,8 +106,10 @@ class StatusController extends Controller
             ->whereMonth('T.tgl_timbang', $nm)
             ->whereYear('T.tgl_timbang', $nY)
             ->where(function ($query) {
-                $query->where('ket_timbang', '=', 'Balita BGM')
-                      ->orWhere('ket_timbang', '=', 'Balita 2T');
+                $query
+                ->where('ket_timbang', '=', 'Balita 2T & BGM')
+                ->orWhere('ket_timbang', '=', 'Balita 2T')
+                ->orWhere('ket_timbang', '=', 'Balita BGM');
             })
             ->get();
         // dd($data);

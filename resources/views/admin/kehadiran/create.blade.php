@@ -11,8 +11,8 @@
 
 @section('breadcrumb')
 <h1>
-    Absensi Kehadiran
-    <small>ketidakhadiran bayi/balita dalam kegiatan</small>
+    Data Kehadiran
+    <small>kehadiran peserta posyandu</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -34,11 +34,11 @@
 						@csrf
 						<div class="form-group">
 							<div class="row">
-								<label class="col-md-4 control-label" for="id_kegiatan">Nama Anak</label>
+								<label class="col-md-4 control-label" for="id_anak">Nama Anak</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-child"></i></span>
-										<select class="form-control select2" name="id_kegiatan" style="width: 100%;" required>
+										<select class="form-control select2" name="id_anak" style="width: 100%;" required>
 											<option selected="selected" value="">-- Nama Anak --</option>
 											@foreach($data as $datas)
 												<option value="{{ $datas->id_anak }}">{{ $datas->nama_anak }} | {{ $datas->nama_ibu }}</option>
@@ -50,11 +50,11 @@
 						</div>
 						<div class="form-group">
 							<div class="row">
-								<label class="col-md-4 control-label" for="id_anak">Nama Kegiatan</label>
+								<label class="col-md-4 control-label" for="id_kegiatan">Nama Kegiatan</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-										<select class="form-control select2" name="id_anak" style="width: 100%;" required>
+										<span class="input-group-addon"><i class="fa fa-check-circle-o"></i></span>
+										<select class="form-control select2" name="id_kegiatan" style="width: 100%;" required>
 											<option selected="selected" value="">-- Nama Kegiatan --</option>
 											@foreach($data2 as $datas2)
 												<option value="{{ $datas2->id_kegiatan }}">{{ $datas2->kegiatan }}</option>
@@ -64,19 +64,38 @@
 								</div>
 							</div>
 						</div>
+						<!-- <div class="form-group form-inline">
+							<div class="row">
+								<label class="col-md-4 control-label" for="alamat2">Berat dan Tinggi Badan</label>
+								<div class="input-group col-md-8">
+									<div class="input-group" style="padding-right: 6px;">
+										<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
+										<input type="text" class="form-control" placeholder="Berat Badan" name="berat_badan" required>
+										<span class="input-group-addon">Kg</span>
+									</div>
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-long-arrow-up"></i></span>
+										<input type="text" class="form-control" placeholder="Tinggi Badan" name="tinggi_badan" required>
+										<span class="input-group-addon">cm</span>
+									</div>
+									<br/>
+									<p style="color: grey">Note : Gunakan (.) sebagai pengganti (,)</p>
+								</div>
+							</div>
+						</div> -->
 						<div class="form-group">
 							<div class="row">
 								<label class="col-md-4 control-label" for="alasan">Alasan</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-										<select class="form-control select2" name="alasan" style="width: 100%;" required>
+										<span class="input-group-addon"><i class="fa fa-check-circle-o"></i></span>
+										<select class="form-control" name="alasan" style="width: 100%;" required>
 											<option selected="selected" value="">-- Alasan Tidak Hadir --</option>
 											<option value="Ketiduran">Ketiduran</option>
 											<option value="Pergi">Pergi</option>
 											<option value="Sakit">Sakit</option>
 											<option value="Lupa">Lupa</option>
-											<option value="DLL">DLL</option>
+											<option value="other">DLL</option>
 										</select>
 									</div>
 								</div>
@@ -91,6 +110,19 @@
 											<i class="fa fa-calendar"></i>
 										</div>
 										<input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kunjungan" name="tgl_kunjungan" required autocomplete="off">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<label class="col-md-4 control-label" for="ket_hadir">Keterangan</label>
+								<div class="input-group col-md-8">
+									<div class="input-group date">
+										<div class="input-group-addon">
+											<i class="fa fa-pencil"></i>
+										</div>
+										<textarea class="form-control" rows="3" placeholder="Enter ..." name="ket_hadir"></textarea>
 									</div>
 								</div>
 							</div>

@@ -162,7 +162,8 @@ return [
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        RezaAr\Highcharts\Provider::class,
     ],
 
     /*
@@ -214,6 +215,8 @@ return [
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Chart' => RezaAr\Highcharts\Facade::class,
     ],
 
 ];

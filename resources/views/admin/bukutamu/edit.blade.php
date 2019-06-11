@@ -65,7 +65,7 @@
 								<label class="col-md-4 control-label" for="keperluan">Keperluan</label>
 								<div class="input-group col-md-8">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+										<span class="input-group-addon"><i class="fa fa-circle-o-notch"></i></span>
 										<input type="text" class="form-control" placeholder="keperluan" name="keperluan" value="{{ $datas->keperluan }}" required>
 									</div>
 								</div>
@@ -76,7 +76,7 @@
 								<label class="col-md-4 control-label" for="name"></label>
 								<div class="input-group col-md-8">
 									<button type="submit" class="btn btn-primary" style="margin-right: 6px;">Update</button>
-									<a href="{{ route('ibu.index') }}" class="btn btn-danger">Batal</a>
+									<a href="{{ route('bukutamu.index') }}" class="btn btn-danger">Batal</a>
 								</div>
 							</div>
 						</div>

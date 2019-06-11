@@ -17,7 +17,6 @@ class CreateJenisImunisasisTable extends Migration
             $table->increments('id_j_imun');
             $table->string('nama_imun');
             $table->integer('umur');
-            $table->integer('batas_umur')->nullable();
             $table->timestamps();
         });
     }

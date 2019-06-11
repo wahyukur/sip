@@ -47,7 +47,18 @@
     <table width="100%" style="font-size: 11px">
         <tr>
             <th>Bulan</th>
-            <td>: </td>
+            <td>: 
+                @php
+                    function bln_indo($tanggal){
+                        $bulan = array (
+                            1 =>   'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'
+                        );
+                        $pecahkan = explode('-', $tanggal);
+                        return $bulan[ (int)$pecahkan[1] ];
+                    }
+                    echo strtoupper(bln_indo(date('Y-m-d', strtotime($data_bln->tgl_timbang))));
+                @endphp
+            </td>
             <th>Posyandu</th>
             <td>: Mandiri</td>
         </tr>
@@ -94,11 +105,98 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                @for ($i = 1; $i < 19; $i++)
-                    <td style="border-right: 1px solid black; text-align: center;">{{ $i }}</td>
+            @if (count($data) >= 1)
+                @php $no = 1; @endphp
+                @foreach($data as $datas)
+                <tr>
+                    <td style="border: 1px solid black;">{{ $no++ }}</td>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;">{{ $datas->nama_anak }}</td>
+                    <td style="border: 1px solid black;">
+                        @if ($datas->jenis_kelamin == 0)
+                            L
+                        @else
+                            P
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">{{ date('d-m-Y', strtotime($datas->tgl_lhr)) }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->umur }} Bulan</td>
+                    <td style="border: 1px solid black;">{{ $datas->berat_badan }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->tinggi_badan }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->nama_ibu }} & {{ $datas->nama_suami }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->alamat }} 0{{ $datas->rt }}/0{{ $datas->rw }}</td>
+                    <td style="border: 1px solid black;">{{ $datas->No_KK }}</td>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->ket_timbang == 'Balita 2T' or $datas->ket_timbang == 'Balita 2T & BGM')
+                            Y
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;"></td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->ket_timbang == 'Balita BGM' or $datas->ket_timbang == 'Balita 2T & BGM')
+                            Y
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->gakin == 0)
+                            Y
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">
+                        @if($datas->gakin == 1)
+                            Y
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+                @for ($i = 1; $i < 19-count($data); $i++)
+                    <tr>
+                        <td style="border: 1px solid black;">{{ $no++ }}</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                    </tr>
                 @endfor
-            </tr>
+            @else
+                @for ($i = 1; $i < 19; $i++)
+                    <tr>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                        <td style="border: 1px solid black;color: white">Y</td>
+                    </tr>
+                @endfor
+            @endif
         </tbody>
     </table>
 
@@ -107,7 +205,24 @@
         <tr>
             <td style="padding-left: 50px;">Mengetahui</td>
             <td></td>
-            <td style="padding-left: 500px">Surabaya, 00 Bulan 9999</td>
+            <td style="padding-left: 500px">Surabaya, 
+                @php
+                    function tgl_indon($tanggal){
+                        $bulan = array (
+                            1 =>   'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'
+                        );
+                        $pecahkan = explode('-', $tanggal);
+    
+                        // variabel pecahkan 0 = tanggal
+                        // variabel pecahkan 1 = bulan
+                        // variabel pecahkan 2 = tahun
+ 
+                        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+                    }
+                    $a = tgl_indon(date('Y-m-d'));
+                @endphp
+                {{ $a }}
+            </td>
         </tr>
         <tr>
             <td style="padding-left: 50px;">Ketua Kader Posyandu</td>
@@ -115,9 +230,9 @@
             <td style="padding-left: 500px">Kader yang membuat laporan</td>
         </tr>
         <tr>
-            <td style="padding-left: 50px; padding-top: 50px">(Bu ........................)</td>
+            <td style="padding-left: 50px; padding-top: 70px">(Bu ........................)</td>
             <td></td>
-            <td style="padding-left: 500px; padding-top: 50px;">(Bu ........................)</td>
+            <td style="padding-left: 500px; padding-top: 70px;">(Bu ........................)</td>
         </tr>
     </table>
 </body>

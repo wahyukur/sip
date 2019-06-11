@@ -23,7 +23,7 @@
 
 @section('content')
 <div class="panel panel-default">
-	<div class="panel-heading">Masukkan Data Anak</div>
+	<div class="panel-heading">Masukkan Data Jenis Imunisasi</div>
 	<div class="panel-body">
 		<div class="container">
 			<div class="row">

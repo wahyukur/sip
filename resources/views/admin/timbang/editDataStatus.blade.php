@@ -28,7 +28,12 @@
 			<div class="box-body box-profile">
 				<img class="profile-user-img img-responsive img-circle" src="{!! asset('dist/img/avatar2.png') !!}" alt="User profile picture">
 				<h3 class="profile-username text-center">{{ $data->nama_anak }}</h3>
-				<p class="text-muted text-center">{{ $data->tgl_timbang }}</p>
+				<p class="text-muted text-center">
+					@php
+                        $date = date("d-m-Y", strtotime($data->tgl_timbang))
+                    @endphp
+					Tanggal Timbang : {{ $date }}
+				</p>
 				<ul class="list-group list-group-unbordered">
 					<li class="list-group-item">
 						<b>Berat Badan</b> <a class="pull-right">{{ $data->berat_badan }} Kg</a>
@@ -65,9 +70,10 @@
 												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
 												<select class="form-control" name="gibur_klinis">
 													@if($data->gibur_klinis == null)
-														<option selected="selected">--Pilih --</option>
+														<option selected="selected" value="">--Pilih --</option>
 													@else
 														<option selected="selected" value="{{ $data->gibur_klinis }}">{{ $data->gibur_klinis }}</option>
+														<option value="">--Pilih --</option>
 													@endif
 								                    <option value="MRS">MRS</option>
 								                    <option value="KWS">KWS</option>
@@ -85,9 +91,10 @@
 												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
 												<select class="form-control" name="st_gizi_bbtb">
 													@if($data->st_gizi_bbtb == null)
-														<option selected="selected">--Pilih --</option>
+														<option selected="selected" value="">--Pilih --</option>
 													@else
 														<option selected="selected" value="{{ $data->st_gizi_bbtb }}">{{ $data->st_gizi_bbtb }}</option>
+														<option value="">--Pilih --</option>
 													@endif
 								                    <option value="Sangat Kurus">Sangat Kurus</option>
 								                    <option value="Kurus">Kurus</option>
@@ -99,11 +106,31 @@
 								</div>
 								<div class="form-group">
 									<div class="row">
-										<label class="col-md-4 control-label" for="penanganan">Berat dan Tinggi Badan</label>
+										<label class="col-md-4 control-label" for="penanganan">Penanganan</label>
 										<div class="input-group col-md-8">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
-												<input type="text" class="form-control" placeholder="Berat Badan" name="penanganan">
+												<select class="form-control" id="dbType" name="penanganan">
+													@if($data->penanganan == null)
+														<option selected="selected" value="">--Pilih --</option>
+													@else
+														<option selected="selected" value="{{ $data->penanganan }}">{{ $data->penanganan }}</option>
+														<option value="">--Pilih --</option>
+													@endif
+													<option value="PMT-FORMULA PUSKESMAS">PMT-FORMULA PUSKESMAS</option>
+								                    <option value="other">Lainnya</option>
+								                </select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group" id="otherServer">
+									<div class="row">
+										<label class="col-md-4 control-label" for="penanganan"></label>
+										<div class="input-group col-md-8">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
+												<input type="text" class="form-control" placeholder="Penanganan" name="penanganan1">
 											</div>
 										</div>
 									</div>
@@ -114,7 +141,30 @@
 										<div class="input-group col-md-8">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
-												<input type="text" class="form-control" placeholder="Berat Badan" name="penyebab_utama">
+												<select class="form-control" id="penyebabType" name="penyebab_utama">
+													@if($data->penyebab_utama == null)
+														<option selected="selected" value="">--Pilih --</option>
+													@else
+														<option selected="selected" value="{{ $data->penyebab_utama }}">{{ $data->penyebab_utama }}</option>
+														<option value="">--Pilih --</option>
+													@endif
+													<option value="BBLR (BB<=2500 gram)">BBLR (BB<=2500 gram)</option>
+													<option value="SAKIT">SAKIT</option>
+								                    <option value="KEMISKINAN">KEMISKINAN</option>
+								                    <option value="PENGETAHUAN">PENGETAHUAN</option>
+								                    <option value="other">Lainnya</option>
+								                </select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group" id="otherPenyebab">
+									<div class="row">
+										<label class="col-md-4 control-label" for="penyebab_utama1"></label>
+										<div class="input-group col-md-8">
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
+												<input type="text" class="form-control" placeholder="Penyebab Utama" name="penyebab_utama1">
 											</div>
 										</div>
 									</div>
@@ -125,7 +175,11 @@
 										<div class="input-group col-md-8">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
-												<input type="text" class="form-control" placeholder="Berat Badan" name="alasan_gibur">
+												@if($data->alasan_gibur == null)
+													<input type="text" class="form-control" placeholder="Alasan Gibur" name="alasan_gibur">
+												@else
+													<input type="text" class="form-control" placeholder="Alasan Gibur" name="alasan_gibur" value="{{ $data->alasan_gibur }}">
+												@endif
 											</div>
 										</div>
 									</div>
@@ -136,7 +190,19 @@
 										<div class="input-group col-md-8">
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
-												<input type="text" class="form-control" placeholder="Berat Badan" name="tindakan">
+												<select class="form-control" name="tindakan">
+													@if($data->tindakan == null)
+														<option selected="selected" value="">--Pilih --</option>
+													@else
+														<option selected="selected" value="{{ $data->tindakan }}">{{ $data->tindakan }}</option>
+														<option value="">--Pilih --</option>
+													@endif
+													<option value="DO">DO</option>
+								                    <option value="S">S</option>
+								                    <option value="M">M</option>
+								                    <option value="PUSK">PUSK</option>
+								                    <option value="RS">RS</option>
+								                </select>
 											</div>
 										</div>
 									</div>
@@ -182,5 +248,33 @@
 		//Initialize Select2 Elements
 		$('.select2').select2()
 	})
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		toggleFields();
+		$("#dbType").change(function () {
+			toggleFields();
+		});
+	});
+	function toggleFields() {
+		if ($("#dbType").val() === "other")
+			$("#otherServer").show();
+		else
+			$("#otherServer").hide();
+	}
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		toggleFields1();
+		$("#penyebabType").change(function () {
+			toggleFields1();
+		});
+	});
+	function toggleFields1() {
+		if ($("#penyebabType").val() === "other")
+			$("#otherPenyebab").show();
+		else
+			$("#otherPenyebab").hide();
+	}
 </script>
 @endsection

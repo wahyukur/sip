@@ -19,6 +19,7 @@ class CreateAgendasTable extends Migration
             $table->string('tempat');
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->tinyInteger('j_kegiatan');
             $table->string('color')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();

@@ -45,6 +45,16 @@
                         <td>{{ $data->end }}</td>
                     </tr>
                     <tr>
+                        <th>Jenis Kegiatan</th>
+                        <td>
+                            @if ($data->j_kegiatan == 0)
+                                Rutin
+                            @else
+                                Tambahan
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Warna</th>
                         <td><i class="fa fa-square" aria-hidden="true" style="
                         @if ($data->color == null)
@@ -56,7 +66,13 @@
                     </tr>
                     <tr>
                         <th>Keterangan</th>
-                        <td>{{ $data->keterangan }}</td>
+                        <td>
+                            @if($data->keterangan == null)
+                                Tidak Ada
+                            @else
+                                {{ $data->keterangan }}
+                            @endif
+                        </td>
                     </tr>
                 </table>
 
@@ -66,6 +82,7 @@
                     <a href="{{ route('agenda.index') }}" class=" btn btn-sm btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
                     <button type="button" class=" btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Edit</button>
                     <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
+                    <a href="{{ route('printAbsen', $data->id_agenda) }}" class=" btn btn-sm btn-success" target="_blank"><span><i class="fa fa-print" aria-hidden="true"></i></span> Cetak Absen</a>
                 </form>
             </div>
             <!-- /.box-body -->
@@ -79,7 +96,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Edit Agenda</h4>
                     </div>
                     <form method="post" action="{{ route('agenda.update', $data->id_agenda) }}">
                     @csrf
@@ -111,6 +128,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="j_kegiatan">Jenis Kegiatan</label>
+                                <div class="input-group">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label" style="padding: 6px 10px 0px 0px;">
+                                            <input type="radio" name="j_kegiatan" class="form-check-input minimal" value="0" <?php echo ($data->j_kegiatan == 0)?'checked':'' ?> required> Rutin
+                                        </label>
+                                        <label class="form-check-label">
+                                            <input type="radio" name="j_kegiatan" class="form-check-input minimal" value="1" <?php echo ($data->j_kegiatan == 1)?'checked':'' ?> required> Tambahan
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Color Picker -->
                             <div class="form-group">
                                 <label for="warna">Warna Agenda:</label>
@@ -130,8 +160,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                         </div>
                     </form>
                 </div>      

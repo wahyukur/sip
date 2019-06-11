@@ -32,10 +32,10 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Tanggal</th>
-                            <th style="text-align: center;">Waktu</th>
                             <th style="text-align: center;">Nama Kegiatan</th>
                             <th style="text-align: center;">Nama Tamu</th>
+                            <th style="text-align: center;">Tanggal</th>
+                            <th style="text-align: center;">Waktu</th>
                             <th style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
@@ -44,6 +44,8 @@
                         @foreach($data as $datas)
                         <tr>
                             <td>{{ $no++ }}</td>
+                            <td>{{ $datas->kegiatan }}</td>
+                            <td>{{ $datas->nama_tamu }}</td>
                             <td>
                                 @php
                                     $date = date("d-m-Y", strtotime($datas->start))
@@ -56,14 +58,15 @@
                                 @endphp
                                 {{ $date }} WIB
                             </td>
-                            <td>{{ $datas->kegiatan }}</td>
-                            <td>{{ $datas->nama_tamu }}</td>
                             <td>
                                 <form action="{{ route('kegiatan.destroy', $datas->id_kegiatan) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <div class="btn-group">
                                         <a href="{{ route('kegiatan.edit', $datas->id_kegiatan) }}" class=" btn btn-sm btn-warning" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+
+                                        <a href="{{ route('kegiatan.show', $datas->id_kegiatan) }}" class=" btn btn-sm btn-success" data-toggle="tooltip" title="Detail"><span class="glyphicon glyphicon-info-sign"></span></a>
+
                                         <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')" data-toggle="tooltip" title="Hapus"><span class="glyphicon glyphicon-trash"></span></button>
                                     </div>
 
@@ -75,10 +78,10 @@
                     <tfoot>
                         <tr>
                             <th style="text-align: center;">#</th>
-                            <th style="text-align: center;">Tanggal</th>
-                            <th style="text-align: center;">Waktu</th>
                             <th style="text-align: center;">Nama Kegiatan</th>
                             <th style="text-align: center;">Nama Tamu</th>
+                            <th style="text-align: center;">Tanggal</th>
+                            <th style="text-align: center;">Waktu</th>
                             <th style="text-align: center;">Aksi</th>
                         </tr>
                     </tfoot>
